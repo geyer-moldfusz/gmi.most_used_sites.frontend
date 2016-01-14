@@ -3,16 +3,16 @@
 <table border="1">
 <tr>
   <th>Host</th>
-  <th>Visited at</th>
-  <th>Duration</th>
   <th>Active</th>
+  <th>Inactive</th>
+  <th>Total</th>
 </tr>
 {{#each model as |visit|}}
 <tr>
   <td>{{visit.host}}</td>
-  <td>{{visit.visited_at}}</td>
-  <td>{{visit.duration}}ms</td>
   <td>{{visit.active}}</td>
+  <td>{{visit.inactive}}</td>
+  <td>{{visit.total}}</td>
 </tr>
 {{/each}}
 </table>

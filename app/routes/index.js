@@ -2,6 +2,6 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   model() {
-    return this.store.findAll('visit');
+    return this.store.findAll('synopsis');
   },
 });
