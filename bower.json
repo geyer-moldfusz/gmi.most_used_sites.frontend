@@ -1,0 +1,16 @@
+{
+  "name": "gmi.most-used-sites.frontend",
+  "version": "0.0.0",
+  "homepage": "#",
+  "license": "GPLv3",
+  "private": true,
+  "dependencies": {
+    "angular": "1.4.x",
+    "angular-mocks": "1.4.x",
+    "angular-resource": "1.4.x",
+    "angular-route": "1.4.x",
+    "jquery": "~2.2.0",
+    "bootstrap": "~3.3.6",
+    "d3": "~3.5.9"
+  }
+}

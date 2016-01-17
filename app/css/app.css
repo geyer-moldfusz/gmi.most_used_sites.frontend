@@ -1,0 +1,60 @@
+@font-face {
+    font-family: "CooperHewitt-Book";
+    src: url("fonts/CooperHewitt-WebFonts-public/CooperHewitt-Book.woff") format('woff');
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "CooperHewitt-BookItalic";
+    src: url("fonts/CooperHewitt-WebFonts-public/CooperHewitt-BookItalic.woff") format('woff');
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "CooperHewitt-Medium";
+    src: url("fonts/CooperHewitt-WebFonts-public/CooperHewitt-Medium.woff") format('woff');
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "CooperHewitt-Bold";
+    src: url("fonts/CooperHewitt-WebFonts-public/CooperHewitt-Bold.woff") format('woff');
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "CooperHewitt-Semibold";
+    src: url("fonts/CooperHewitt-WebFonts-public/CooperHewitt-Semibold.woff") format('woff');
+    font-weight: normal;
+}
+
+body {
+    background-color: #F2F2F2;
+    height: 100%;
+}
+
+.ng-scope {
+    height: 100%;
+}
+
+#menu {
+    width: 100%;
+    height: 250px;
+    background-color: #000;
+    opacity: 0.9;
+    display: block;
+    position: absolute;
+    top: 0;
+}
+
+rect {
+  fill: #ffffff;
+  filter:url(svg/filters.svg#dropshadow);
+}
+
+text {
+  font-family: "CooperHewitt-Medium";
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
+  text-anchor: middle;
+}
