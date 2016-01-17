@@ -2,16 +2,19 @@
 <html ng-app="trckyrslfApp">
   <head>
     <script src="/bower_components/angular/angular.min.js"></script>
+    <script src="/bower_components/angular-animate/angular-animate.min.js"></script>
     <script src="/bower_components/angular-route/angular-route.min.js"></script>
     <script src="/bower_components/angular-resource/angular-resource.min.js"></script>
+    <script src="/bower_components/jquery/dist/jquery.min.js"></script>
     <script src="/bower_components/d3/d3.min.js"></script>
     <script src="js/app.js"></script>
     <script src="js/directives.js"></script>
     <script src="js/controllers.js"></script>
     <script src="js/services.js"></script>
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="css/app.css" />
   </head>
   <body>
-    <div ng-view></div>
+    <div id="content" ng-view></div>
   </body>
 </html>

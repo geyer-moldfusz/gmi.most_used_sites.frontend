@@ -45,4 +45,11 @@ trckyrslfControllers.controller('SynopsesController', ['$scope', 'Visit', functi
     }
     $scope.synopses = Array.from(synopses.values());
   });
+
+  $scope.menu = false;
+
+  $scope.toggleMenu = function() {
+    $scope.menu ? $scope.menu = false : $scope.menu = true;
+  };
+
 }]);
