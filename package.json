@@ -22,6 +22,7 @@
     "tmp": "0.0.28"
   },
   "scripts": {
+    "preclean": "npm install",
     "clean": "grunt clean",
     "prebuild": "npm install",
     "build": "grunt build",
