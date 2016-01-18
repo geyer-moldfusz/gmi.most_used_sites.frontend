@@ -13,5 +13,11 @@
     "jquery": "~2.2.0",
     "bootstrap": "~3.3.6",
     "d3": "~3.5.9"
+  },
+  "exportsOverride": {
+    "*": {
+      "js": "**/*.min.js*",
+      "css": "**/*.min.css*"
+    }
   }
 }
