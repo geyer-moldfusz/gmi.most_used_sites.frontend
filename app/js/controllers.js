@@ -36,7 +36,7 @@ trckyrslfControllers.controller('SynopsesController', ['$scope', 'Visit', functi
     }
 
     var synopses = new Map();
-    for (var visit of visits['visits']) {
+    for (let visit of visits['visits']) {
       if (synopses.has(visit.host)) {
         synopses.set(visit.host, merge(visit, synopses.get(visit.host)));
       } else {
