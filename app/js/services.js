@@ -6,8 +6,8 @@ trckyrslfServices.factory('Cache', ['$cacheFactory', function($cacheFactory) {
 
 
 trckyrslfServices.factory('VisitSource', ['$resource', function($resource) {
-//    return $resource('https://api.mostusedsites.guerilla-it.net/visits', {}, {
-    return $resource('visits.json', {}, {
+    return $resource('https://api.mostusedsites.guerilla-it.net/visits', {}, {
+//    return $resource('visits.json', {}, {
       query: {method:'GET', timeout: 120000}
     });
   }

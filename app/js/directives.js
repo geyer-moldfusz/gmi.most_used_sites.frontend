@@ -28,13 +28,10 @@ trckyrslfDirectives.directive('d3Treemap', function() {
         .sticky(true)
         .sort(function(a, b) { return a.host - b.host; });
 
-//      scope.$watch('synopses', function(newVal) {
-//        scope.render(new Synopses(newVal));
-//      });
       scope.$watch(function() {
         return scope.synopses.updated();
       }, function(newVal, oldVal) {
-        scope.render(new Synopses(Array.from(scope.synopses.data.values())));
+        render(new Synopses(Array.from(scope.synopses.data.values())));
       });
 
       scope.$watch(function() {
@@ -43,7 +40,7 @@ trckyrslfDirectives.directive('d3Treemap', function() {
         transform(new Synopses(Array.from(scope.synopses.data.values())));
       });
 
-      scope.render = function(data) {
+      var render = function(data) {
         if (!data.children.length) return;
 
         treemap.value(function(d) { return d[scope.selection.getMapping()]; });
@@ -76,9 +73,7 @@ trckyrslfDirectives.directive('d3Treemap', function() {
             .attr("y", function(d) { return d.dy / 2; })
             .attr("dy", "0.5")
             .text(function(d) { return d.host; })
-            .style("font-size", function(d) {
-              return (d.dx / (d.host.length * 15)) + "em";
-            })
+            .style("font-size", function(d) { return (d.dx / d.host.length) + "px"; })
             .style("display", function(d) {
               d.w = this.getComputedTextLength();
               return d.dx > d.w ? "block" : "none";
@@ -95,7 +90,7 @@ trckyrslfDirectives.directive('d3Treemap', function() {
 
         var svg = d3.select(element[0]);
         var t = svg.selectAll("g.cell").transition()
-          .duration(500)
+          .duration(750)
           .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
 
         t.select("rect")
@@ -105,9 +100,7 @@ trckyrslfDirectives.directive('d3Treemap', function() {
         t.select("text")
           .attr("x", function(d) { return d.dx / 2; })
           .attr("y", function(d) { return d.dy / 2; })
-          .style("font-size", function(d) {
-            return (d.dx / (d.host.length * 15)) + "em";
-          });
+          .style("font-size", function(d) { return (d.dx / d.host.length) + "px"; });
       };
     }
   }
