@@ -5,10 +5,8 @@ var trckyrslfDirectives =  angular.module('trckyrslfDirectives', []);
 trckyrslfDirectives.directive('d3Treemap', function() {
   return {
     restrict: 'EA',
-    scope: {
-      data: '=',
-      onSelect: '&'
-    },
+    controller: 'SynopsesController',
+    scope: {},
     link: function(scope, element, attrs) {
 
       function Synopses(data) {
@@ -20,16 +18,12 @@ trckyrslfDirectives.directive('d3Treemap', function() {
           .slice(0, 20);
       }
 
-      scope.$watch('data', function(newVal) {
+      scope.$watch('synopses', function(newVal) {
         if (!newVal) return;
         if (!newVal.length) return;
 
         scope.render(new Synopses(newVal));
       });
-
-      scope.select = function(host) {
-        scope.onSelect({host: host});
-      };
 
       scope.render = function(data) {
         if (!data) return;

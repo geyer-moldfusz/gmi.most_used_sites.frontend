@@ -15,7 +15,7 @@ trckyrslfApp.config(['$routeProvider',
       }).
       when('/synopses', {
         templateUrl: 'partials/synopes-list.html',
-        controller: 'SynopsesController'
+        //controller: 'SynopsesController'
       }).
       otherwise({
         redirectTo: '/visits'
