@@ -1,5 +1,6 @@
 var trckyrslfApp = angular.module('trckyrslfApp', [
   'ngRoute',
+  'trckyrslfFilters',
   'trckyrslfServices',
   'trckyrslfControllers',
   'trckyrslfDirectives'

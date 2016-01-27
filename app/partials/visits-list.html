@@ -11,7 +11,7 @@
       <th>Aktive</th>
     </tr>
     <tr ng-repeat="visit in visits">
-      <td class="host">{{visit.host}}</td>
+      <td class="host"><a href="" ng-click="update_selection()">{{visit.host}}</a></td>
       <td>{{visit.visited_at}}</td>
       <td>{{visit.duration}}</td>
       <td>{{visit.active}}</td>

@@ -6,7 +6,8 @@ trckyrslfDirectives.directive('d3Treemap', function() {
   return {
     restrict: 'EA',
     scope: {
-      data: '=d3Treemap'
+      data: '=',
+      onSelect: '&'
     },
     link: function(scope, element, attrs) {
 
@@ -20,10 +21,15 @@ trckyrslfDirectives.directive('d3Treemap', function() {
       }
 
       scope.$watch('data', function(newVal) {
-        if (newVal) {
-          scope.render(new Synopses(newVal));
-        }
+        if (!newVal) return;
+        if (!newVal.length) return;
+
+        scope.render(new Synopses(newVal));
       });
+
+      scope.select = function(host) {
+        scope.onSelect({host: host});
+      };
 
       scope.render = function(data) {
         if (!data) return;
@@ -55,8 +61,9 @@ trckyrslfDirectives.directive('d3Treemap', function() {
         var cell = svg.selectAll("g")
             .data(nodes)
           .enter().append("svg:g")
-            .attr("class", "cell")
-            .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
+              .attr("class", "cell")
+              .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
+              .on("click", function(d) { scope.select(d.host); })
 
         cell.append("svg:rect")
             .attr("width", function(d) { return d.dx - border; })

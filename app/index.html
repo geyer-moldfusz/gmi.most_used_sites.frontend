@@ -8,6 +8,7 @@
     <script src="/bower_components/jquery/dist/jquery.min.js"></script>
     <script src="/bower_components/d3/d3.min.js"></script>
     <script src="js/app.js"></script>
+    <script src="js/filters.js"></script>
     <script src="js/directives.js"></script>
     <script src="js/controllers.js"></script>
     <script src="js/services.js"></script>
@@ -15,6 +16,65 @@
     <link rel="stylesheet" href="css/app.css" />
   </head>
   <body>
+    <nav class="navbar navbar-inverse navbar-static-top" ng-controller="SelectionController">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-1"><h1>Trck yrslf</h1></div>
+          <div class="col-md-2"><h2>Filter</h2></div>
+          <div class="col-md-3">
+            <div class="row">
+              <div class="col-xs-12"><h3>Time range</h3></div>
+            </div>
+            <div class="row">
+              <div class="col-xs-12"><h3>Zoom</h3></div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="row">
+              <div class="col-xs-12"><h2 ng-bind="selection.host|host">Nothing selected</h2></div>
+            </div>
+            <div class="row">
+              <div class="col-xs-4">
+                <h3>Share</h3>
+                <p ng-bind="selection.share|number|perc">0%</p>
+              </div>
+              <div class="col-xs-8">
+                <div class="row">
+                  <div class="col-xs-6">
+                    <h3>hrs</h3>
+                    <p ng-bind="selection.time|hrs|number:0">0</p>
+                  </div>
+                  <div class="col-xs-3">
+                    <h3>mins</h3>
+                    <p ng-bind="selection.time|min|number:0">0</p>
+                  </div>
+                  <div class="col-xs-3">
+                    <h3>secs</h3>
+                    <p ng-bind="selection.time|sec">0</p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-xs-12">
+                    <h3>usage</h3>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="row">
+              <div class="col-xs-12">
+                <h2>Search</h2>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-6"><a>Hide</a></div>
+              <div class="col-xs-6"><a>Cmpr yrslf</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
     <div id="content" ng-view></div>
   </body>
 </html>

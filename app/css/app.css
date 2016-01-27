@@ -38,15 +38,11 @@ body, html {
 }
 
 nav {
-  -webkit-transition:all linear 0.5s;
-  transition:all linear 0.5s;
-}
-
-nav.ng-hide {
-    opacity:0;
+  color: #fff;
 }
 
 rect {
+  cursor: pointer;
   fill: #ffffff;
   filter:url(svg/filters.svg#dropshadow);
 }
