@@ -6,8 +6,8 @@ trckyrslfServices.factory('Cache', ['$cacheFactory', function($cacheFactory) {
 
 
 trckyrslfServices.factory('VisitSource', ['$resource', function($resource) {
-    return $resource('https://api.mostusedsites.guerilla-it.net/visits', {}, {
-//    return $resource('visits.json', {}, {
+//    return $resource('https://api.mostusedsites.guerilla-it.net/visits', {}, {
+    return $resource('visits.json', {}, {
       query: {method:'GET', timeout: 120000}
     });
   }
@@ -74,6 +74,8 @@ trckyrslfServices.factory('Selection', [function() {
   var total = 0;
   var global = 0;
 
+  var map_by = 'total';
+
   var update = function(synopses) {
     global = 0;
     for (var synopsis of synopses.data.values()) {
@@ -87,6 +89,14 @@ trckyrslfServices.factory('Selection', [function() {
     share = 100 * total / global;
   };
 
+  var setMapping = function(timing) {
+    map_by = timing;
+  };
+
+  var getMapping = function() {
+    return map_by;
+  };
+
   return {
     getData: function() {
       return {
@@ -95,11 +105,11 @@ trckyrslfServices.factory('Selection', [function() {
         time: total
       };
     },
-    update: function(synopses) {
-        update(synopses);
-    },
+    getMapping: getMapping,
+    update: update,
     setHost: function(new_host) {
       host = new_host;
-    }
+    },
+    setMapping: setMapping
   };
 }]);

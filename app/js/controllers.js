@@ -11,11 +11,8 @@ trckyrslfControllers.controller('VisitsController', ['$scope', 'VisitSource', fu
 
 
 trckyrslfControllers.controller('SynopsesController', ['$scope', 'Synopses', 'Selection', function($scope, synopses, selection) {
-  $scope.$watch(function() {
-    return synopses.updated();
-  }, function(newVal, oldVal) {
-    $scope.synopses = Array.from(synopses.data.values());
-  });
+  $scope.synopses = synopses;
+  $scope.selection = selection;
 
   $scope.select = function(host) {
     selection.setHost(host);
@@ -31,4 +28,8 @@ trckyrslfControllers.controller('SelectionController', ['$scope', 'Selection', f
   }, function(newVal, oldVal) {
     $scope.selection = selection.getData();
   });
+
+  $scope.map = function(timing) {
+    selection.setMapping(timing) ;
+  };
 }]);
