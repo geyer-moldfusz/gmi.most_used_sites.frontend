@@ -1,13 +1,8 @@
 var trckyrslfServices = angular.module('trckyrslfServices', ['ngResource']);
 
-trckyrslfServices.factory('Cache', ['$cacheFactory', function($cacheFactory) {
-  return $cacheFactory('synopses-cache');
-}]);
-
-
 trckyrslfServices.factory('VisitSource', ['$resource', function($resource) {
-    return $resource('https://api.mostusedsites.guerilla-it.net/visits', {}, {
-//    return $resource('visits.json', {}, {
+//    return $resource('https://api.mostusedsites.guerilla-it.net/visits', {}, {
+    return $resource('visits.json', {}, {
       query: {method:'GET', timeout: 120000}
     });
   }
@@ -74,7 +69,8 @@ trckyrslfServices.factory('Selection', [function() {
   var total = 0;
   var global = 0;
 
-  var map_by = 'total';
+  var mapping = 'total';
+  var zoom = 100;
 
   var update = function(synopses) {
     global = 0;
@@ -89,27 +85,41 @@ trckyrslfServices.factory('Selection', [function() {
     share = 100 * total / global;
   };
 
+  var setHost = function(new_host) {
+    host = new_host;
+  };
+
   var setMapping = function(timing) {
-    map_by = timing;
+    mapping = timing;
   };
 
   var getMapping = function() {
-    return map_by;
+    return mapping;
+  };
+
+  var getZoom = function() {
+    return zoom;
+  };
+
+  var setZoom = function(z) {
+    zoom = z;
+  };
+
+  var getData = function() {
+    return {
+      host: host,
+      share: share,
+      time: Math.floor(total / 10)
+    };
   };
 
   return {
-    getData: function() {
-      return {
-        host: host,
-        share: share,
-        time: total
-      };
-    },
-    getMapping: getMapping,
     update: update,
-    setHost: function(new_host) {
-      host = new_host;
-    },
-    setMapping: setMapping
+    getData: getData,
+    getMapping: getMapping,
+    getZoom: getZoom,
+    setHost: setHost,
+    setMapping: setMapping,
+    setZoom: setZoom
   };
 }]);

@@ -23,6 +23,9 @@ trckyrslfControllers.controller('SynopsesController', ['$scope', 'Synopses', 'Se
 
 
 trckyrslfControllers.controller('SelectionController', ['$scope', 'Selection', function($scope, selection) {
+  $scope.mapping = selection.getMapping();
+  $scope.zoom = selection.getZoom();
+
   $scope.$watch(function() {
     return selection.getData().time;
   }, function(newVal, oldVal) {
@@ -31,5 +34,15 @@ trckyrslfControllers.controller('SelectionController', ['$scope', 'Selection', f
 
   $scope.map = function(timing) {
     selection.setMapping(timing) ;
+  };
+
+  $scope.zoomOut = function() {
+    if ($scope.zoom > 0) $scope.zoom--;
+    selection.setZoom($scope.zoom);
+  };
+
+  $scope.zoomIn = function() {
+    if ($scope.zoom < 100) $scope.zoom++;
+    selection.setZoom($scope.zoom);
   };
 }]);
