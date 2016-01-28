@@ -31,6 +31,7 @@ trckyrslfControllers.controller('SynopsesController', ['$scope', 'Synopses', 'Se
 
 
 trckyrslfControllers.controller('SelectionController', ['$scope', 'Selection', function($scope, selection) {
+  $scope.menu = true;
   $scope.mapping = selection.getMapping();
   $scope.zoom = selection.getZoom();
 
@@ -53,4 +54,8 @@ trckyrslfControllers.controller('SelectionController', ['$scope', 'Selection', f
     if ($scope.zoom < 100) $scope.zoom++;
     selection.setZoom($scope.zoom);
   };
+
+  $scope.showMenu = function() {
+    $scope.menu = true;
+  }
 }]);

@@ -17,7 +17,10 @@
   </head>
   <body>
     <nav class="navbar navbar-inverse navbar-static-top" ng-controller="SelectionController">
-      <div class="container-fluid">
+      <div class="container-fluid animate-menu" ng-hide="menu">
+        <button ng-click="showMenu()">Show</button>
+      </div>
+      <div class="container-fluid animate-menu" ng-show="menu">
         <div class="row">
           <div class="col-md-1"><h1>Trck yrslf</h1></div>
           <div class="col-md-2"><h2>Filter</h2>
@@ -77,7 +80,7 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-xs-6"><a>Hide</a></div>
+              <div class="col-xs-6"><button ng-click="menu=false">Hide</button><div>
               <div class="col-xs-6"><a>Cmpr yrslf</a></div>
             </div>
           </div>
