@@ -40,6 +40,10 @@ nav {
   color: #fff;
 }
 
+.navbar {
+  margin-bottom: 4px;
+}
+
 #map {
   display: block;
   width: 100%;

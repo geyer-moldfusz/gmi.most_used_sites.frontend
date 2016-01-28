@@ -12,7 +12,7 @@ trckyrslfDirectives.directive('d3Treemap', function($window) {
         scope.$apply();
       });
 
-      var border = 10;
+      var border = 4;
       var w = 0;
       var h = 0;
 
@@ -20,7 +20,7 @@ trckyrslfDirectives.directive('d3Treemap', function($window) {
         var boundRect = element[0].getBoundingClientRect();
         return {
           "w": boundRect.width,
-          "h": $window.innerHeight - boundRect.top
+          "h": $window.innerHeight - boundRect.top - 4
         };
       };
 
@@ -56,7 +56,7 @@ trckyrslfDirectives.directive('d3Treemap', function($window) {
         })
         .value(value)
         .round(false)
-        .sticky(true)
+        .sticky(false)
         .sort(function(a, b) { return a.host - b.host; });
 
       scope.$watch(function() {

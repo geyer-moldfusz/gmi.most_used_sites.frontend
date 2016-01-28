@@ -41,6 +41,7 @@ trckyrslfServices.factory('Synopses', ['VisitSource', 'Selection', function(sour
 
     // add visits to cache
     for (var visit of visits['visits']) {
+      if (!visit.host) continue;
       if (synopses.has(visit.host)) {
         synopses.set(visit.host, merge(visit, synopses.get(visit.host)));
       } else {
