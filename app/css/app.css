@@ -51,6 +51,10 @@ rect {
   fill: #ffffff;
 }
 
+rect.selected {
+  fill: #ccc;
+}
+
 text {
   font-family: "CooperHewitt-Medium";
   text-transform: uppercase;

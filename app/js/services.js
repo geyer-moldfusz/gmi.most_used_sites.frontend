@@ -127,17 +127,21 @@ trckyrslfServices.factory('Selection', ['Timings', function(timings) {
     share = 100 * total / global;
   };
 
+  var getHost = function() {
+    return host;
+  };
+
   var setHost = function(new_host) {
     host = new_host;
+  };
+
+  var getMapping = function() {
+    return mapping;
   };
 
   var setMapping = function(m) {
     mapping = m;
     timings.sort(mapping);
-  };
-
-  var getMapping = function() {
-    return mapping;
   };
 
   var getZoom = function() {
@@ -159,6 +163,7 @@ trckyrslfServices.factory('Selection', ['Timings', function(timings) {
   return {
     update: update,
     getData: getData,
+    getHost: getHost,
     getMapping: getMapping,
     getZoom: getZoom,
     setHost: setHost,

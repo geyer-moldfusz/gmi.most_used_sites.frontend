@@ -89,7 +89,7 @@ trckyrslfDirectives.directive('d3Treemap', function($window) {
           .enter().append("svg:g")
               .attr("class", "cell")
               .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
-              .on("click", function(d) { scope.select(d.host); })
+              .on("click", function(d) { select(d.host); });
 
         cell.append("svg:rect")
             .attr("width", function(d) { return d.dx - border; })
@@ -106,6 +106,15 @@ trckyrslfDirectives.directive('d3Treemap', function($window) {
               return d.dx > d.w ? "block" : "none";
             });
       };
+
+      var select = function(host) {
+        scope.select(host);
+
+        d3.select(element[0]).selectAll("g.cell").select("rect")
+          .attr("class", function(d) {
+            return (d.host == scope.selection.getHost()) ? "selected" : "de-selected";
+          });
+      }
 
       var transform = function(data) {
         if (!data.size) return;
