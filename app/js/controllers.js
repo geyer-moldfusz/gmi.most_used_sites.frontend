@@ -33,7 +33,16 @@ trckyrslfControllers.controller('SynopsesController', ['$scope', 'Synopses', 'Se
 trckyrslfControllers.controller('SelectionController', ['$scope', 'Selection', function($scope, selection) {
   $scope.menu = true;
   $scope.mapping = selection.getMapping();
-  $scope.zoom = selection.getZoom();
+  $scope.zoom = {
+    value: selection.getZoom(),
+    options: {
+      id: 'zoom',
+      onChange: function(id, zoom) { selection.setZoom(zoom); },
+      hideLimitLabels: true,
+      floor: 0,
+      ceil: 100
+    }
+  };
 
   $scope.$watch(function() {
     return selection.getData().time;
@@ -41,18 +50,8 @@ trckyrslfControllers.controller('SelectionController', ['$scope', 'Selection', f
     $scope.selection = selection.getData();
   });
 
-  $scope.map = function(timing) {
-    selection.setMapping(timing) ;
-  };
-
-  $scope.zoomOut = function() {
-    if ($scope.zoom > 0) $scope.zoom--;
-    selection.setZoom($scope.zoom);
-  };
-
-  $scope.zoomIn = function() {
-    if ($scope.zoom < 100) $scope.zoom++;
-    selection.setZoom($scope.zoom);
+  $scope.map = function(mapping) {
+    selection.setMapping(mapping) ;
   };
 
   $scope.showMenu = function() {

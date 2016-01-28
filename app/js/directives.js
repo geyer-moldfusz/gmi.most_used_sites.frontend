@@ -18,7 +18,6 @@ trckyrslfDirectives.directive('d3Treemap', function($window) {
 
       var dimension = function() {
         var boundRect = element[0].getBoundingClientRect();
-        console.log(boundRect);
         return {
           "w": boundRect.width,
           "h": $window.innerHeight - boundRect.top
