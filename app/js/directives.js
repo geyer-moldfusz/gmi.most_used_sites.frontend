@@ -32,6 +32,23 @@ trckyrslfDirectives.directive('d3Treemap', function($window) {
         return v;
       };
 
+      var fontSize = function(d) {
+        var fontX = function(d) {
+          return (d.dx - border) / (d.host.length * 1.2);
+        }
+        var fontY = function(d) {
+          return d.dy / 2 - border;
+        }
+        var size = Math.min(fontX(d), fontY(d));
+
+        if (size < 4) return "font-none";
+        if (size < 8) return "font-xs";
+        if (size < 12) return "font-s";
+        if (size < 16) return "font-m";
+        if (size < 20) return "font-l";
+        return "font-xl";
+      };
+
       var treemap = d3.layout.treemap()
         .children(function(n) {
           if (n.parent) return null;
@@ -99,12 +116,8 @@ trckyrslfDirectives.directive('d3Treemap', function($window) {
             .attr("x", function(d) { return d.dx / 2; })
             .attr("y", function(d) { return d.dy / 2; })
             .attr("dy", "0.5")
-            .text(function(d) { return d.host.replace(new RegExp(/^www\./), ""); })
-            .style("font-size", function(d) { return (d.dx / d.host.length) + "px"; })
-            .style("display", function(d) {
-              d.w = this.getComputedTextLength();
-              return d.dx > d.w ? "block" : "none";
-            });
+            .attr("class", fontSize)
+            .text(function(d) { return d.host.replace(new RegExp(/^www\./), ""); });
       };
 
       var select = function(host) {
@@ -136,10 +149,7 @@ trckyrslfDirectives.directive('d3Treemap', function($window) {
         t.select("text")
           .attr("x", function(d) { return d.dx / 2; })
           .attr("y", function(d) { return d.dy / 2; })
-          .style("font-size", function(d) { return (d.dx / d.host.length) + "px"; })
-          .style("display", function(d) {
-            return d.value > 10 ? "block" : "none";
-          });
+          .attr("class", fontSize);
       };
     }
   }

@@ -61,3 +61,27 @@ text {
   letter-spacing: 0.13em;
   text-anchor: middle;
 }
+
+text.font-none {
+  display: none;
+}
+
+text.font-xs {
+  font-size: 8px;
+}
+
+text.font-s {
+  font-size: 12px;
+}
+
+text.font-m {
+  font-size: 16px;
+}
+
+text.font-l {
+  font-size: 20px;
+}
+
+text.font-xl {
+  font-size: 24px;
+}
