@@ -62,8 +62,47 @@ trckyrslfServices.factory('Synopses', ['VisitSource', 'Selection', function(sour
 }]);
 
 
+trckyrslfServices.factory('Timings', [function() {
+  var quantity = 25;
+  var timings = [];
 
-trckyrslfServices.factory('Selection', [function() {
+  var mapping;
+  var start;
+  var _zoom;
+
+  var sort = function(m) {
+    mapping = m;
+    timings.sort(function(a, b) {
+      return b[mapping] - a [mapping];
+    });
+  };
+
+  var setTimings = function(data, m) {
+    timings = data;
+    sort(m);
+  };
+
+  var getRange = function(zoom) {
+    if (zoom != _zoom) {
+        start = Math.floor((quantity - timings.length) * zoom / 100 + timings.length - quantity);
+        _zoom = zoom;
+    }
+
+    return {
+      "max": timings[start][mapping],
+      "min": timings[start+quantity][mapping]
+    };
+  };
+
+  return {
+    sort: sort,
+    set: setTimings,
+    getRange: getRange
+  };
+}]);
+
+
+trckyrslfServices.factory('Selection', ['Timings', function(timings) {
   var host = null;
   var share = 100;
   var total = 0;
@@ -72,7 +111,10 @@ trckyrslfServices.factory('Selection', [function() {
   var mapping = 'total';
   var zoom = 100;
 
+  // XXX split into init and setHost
   var update = function(synopses) {
+    timings.set([...synopses.data.values()], mapping);
+
     global = 0;
     for (var synopsis of synopses.data.values()) {
       global += synopsis.total;
@@ -89,8 +131,9 @@ trckyrslfServices.factory('Selection', [function() {
     host = new_host;
   };
 
-  var setMapping = function(timing) {
-    mapping = timing;
+  var setMapping = function(m) {
+    mapping = m;
+    timings.sort(mapping);
   };
 
   var getMapping = function() {

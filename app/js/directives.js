@@ -12,30 +12,9 @@ trckyrslfDirectives.directive('d3Treemap', function($window) {
         scope.$apply();
       });
 
-      var quantity = 25;
-      var start = 0;
-
       var border = 10;
       var w = 0;
       var h = 0;
-
-      var timings = [];
-
-      /*
-      function Synopses(data) {
-        var size = data.length;
-        var start = function() {
-          return (quantity - size) * scope.selection.getZoom() / 100 + size - quantity;
-        }();
-
-        this.name = 'Synopses';
-        this.children = data
-          .sort(function(a, b) {
-            return b.total - a.total;
-          })
-          .slice(start, start+quantity);
-      }
-      */
 
       var dimension = function() {
         var boundRect = element[0].getBoundingClientRect();
@@ -47,10 +26,9 @@ trckyrslfDirectives.directive('d3Treemap', function($window) {
 
       var value = function(d) {
         var v = d[scope.selection.getMapping()];
-        var max = timings[start][scope.selection.getMapping()];
-        var min = timings[start+quantity][scope.selection.getMapping()];
-        if (v < min) return 0;
-        if (v > max) return 0;
+        var range = scope.timings.getRange(scope.selection.getZoom());
+        if (v < range.min) return 0;
+        if (v > range.max) return 0;
         return v;
       };
 
@@ -67,8 +45,6 @@ trckyrslfDirectives.directive('d3Treemap', function($window) {
       scope.$watch(function() {
         return scope.synopses.updated();
       }, function(newVal, oldVal) {
-        timings = [...scope.synopses.data.values()];
-        timings.sort(function(a, b) { return b[scope.selection.getMapping()] - a[scope.selection.getMapping()]; });
         render(scope.synopses.data);
       });
 
@@ -84,14 +60,12 @@ trckyrslfDirectives.directive('d3Treemap', function($window) {
       scope.$watch(function() {
         return scope.selection.getMapping();
       }, function(newVal, oldVal) {
-        timings.sort(function(a, b) { return b[newVal] - a[newVal]; });
         transform(scope.synopses.data);
       });
 
       scope.$watch(function() {
         return scope.selection.getZoom();
       }, function(newVal, oldVal) {
-        start = Math.floor((quantity - scope.synopses.data.size) * newVal / 100 + scope.synopses.data.size - quantity);
         transform(scope.synopses.data);
       });
 
@@ -156,7 +130,6 @@ trckyrslfDirectives.directive('d3Treemap', function($window) {
           .text(function(d) { return d.host; })
           .style("font-size", function(d) { return (d.dx / d.host.length) + "px"; })
           .style("display", function(d) {
-            console.log(d);
             return d.value > 10 ? "block" : "none";
           });
       };

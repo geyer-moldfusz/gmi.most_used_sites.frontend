@@ -10,15 +10,23 @@ trckyrslfControllers.controller('VisitsController', ['$scope', 'VisitSource', fu
 }]);
 
 
-trckyrslfControllers.controller('SynopsesController', ['$scope', 'Synopses', 'Selection', function($scope, synopses, selection) {
+trckyrslfControllers.controller('SynopsesController', ['$scope', 'Synopses', 'Selection', 'Timings', function($scope, synopses, selection, timings) {
   $scope.synopses = synopses;
   $scope.selection = selection;
+  $scope.timings = timings;
 
   $scope.select = function(host) {
     selection.setHost(host);
     selection.update(synopses);
     $scope.$apply();
   };
+
+  $scope.$watch(function() {
+    return selection.getMapping();
+  }, function(mapping) {
+    timings.sort(mapping);
+  });
+
 }]);
 
 

@@ -49,7 +49,6 @@ nav {
 rect {
   cursor: pointer;
   fill: #ffffff;
-  filter:url(svg/filters.svg#dropshadow);
 }
 
 text {
