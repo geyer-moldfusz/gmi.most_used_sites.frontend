@@ -99,7 +99,7 @@ trckyrslfDirectives.directive('d3Treemap', function($window) {
             .attr("x", function(d) { return d.dx / 2; })
             .attr("y", function(d) { return d.dy / 2; })
             .attr("dy", "0.5")
-            .text(function(d) { return d.host; })
+            .text(function(d) { return d.host.replace(new RegExp(/^www\./), ""); })
             .style("font-size", function(d) { return (d.dx / d.host.length) + "px"; })
             .style("display", function(d) {
               d.w = this.getComputedTextLength();
@@ -127,7 +127,6 @@ trckyrslfDirectives.directive('d3Treemap', function($window) {
         t.select("text")
           .attr("x", function(d) { return d.dx / 2; })
           .attr("y", function(d) { return d.dy / 2; })
-          .text(function(d) { return d.host; })
           .style("font-size", function(d) { return (d.dx / d.host.length) + "px"; })
           .style("display", function(d) {
             return d.value > 10 ? "block" : "none";
