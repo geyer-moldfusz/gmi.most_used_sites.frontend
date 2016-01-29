@@ -24,14 +24,6 @@ trckyrslfDirectives.directive('d3Treemap', function($window) {
         };
       };
 
-      var value = function(d) {
-        var v = d[scope.selection.getMapping()];
-        var range = scope.timings.getRange(scope.selection.getZoom());
-        if (v < range.min) return 0;
-        if (v > range.max) return 0;
-        return v;
-      };
-
       var fontSize = function(d) {
         var fontX = function(d) {
           return (d.dx - border) / (d.host.length * 1.2);
@@ -52,17 +44,17 @@ trckyrslfDirectives.directive('d3Treemap', function($window) {
       var treemap = d3.layout.treemap()
         .children(function(n) {
           if (n.parent) return null;
-          return Array.from(n.values());
+          return n.data;
         })
-        .value(value)
         .round(false)
         .sticky(false)
         .sort(function(a, b) { return a.host - b.host; });
 
+      // XXX find better trigger
       scope.$watch(function() {
         return scope.synopses.updated();
-      }, function(newVal, oldVal) {
-        render(scope.synopses.data);
+      }, function() {
+        render(scope.selection.getSynopses());
       });
 
       scope.$watch(function() {
@@ -70,28 +62,22 @@ trckyrslfDirectives.directive('d3Treemap', function($window) {
       }, function(newVal, oldVal) {
         w = newVal.w;
         h = newVal.h;
-        transform(scope.synopses.data);
+        transform(scope.selection.getSynopses());
       }, true);
 
       scope.$watch(function() {
-        return scope.selection.getMapping();
-      }, function(newVal, oldVal) {
-        transform(scope.synopses.data);
-      });
-
-      scope.$watch(function() {
-        return scope.selection.getZoom();
-      }, function(newVal, oldVal) {
-        transform(scope.synopses.data);
+        return scope.selection.updated();
+      }, function() {
+        transform(scope.selection.getSynopses());
       });
 
       var render = function(data) {
-        if (!data.size) return;
+        if (!data.length) return;
 
         treemap.size([w, h]);
 
-        var nodes = treemap.nodes(data)
-          .filter(function(d) { return !d.children; });
+        var nodes = treemap.nodes({data: data})
+          .filter(function(d) { return (d.depth == 1); });
 
         var svg = d3.select(element[0])
           .append("svg:svg")
@@ -129,9 +115,10 @@ trckyrslfDirectives.directive('d3Treemap', function($window) {
       }
 
       var transform = function(data) {
-        if (!data.size) return;
+        if (!data.length) return;
 
-        treemap.size([w, h]).nodes(data);
+        treemap.size([w, h]).nodes({data: data})
+          .filter(function(d) { return (d.depth == 1); });
 
         var svg = d3.select(element[0]).select("svg")
           .attr("width", w)
