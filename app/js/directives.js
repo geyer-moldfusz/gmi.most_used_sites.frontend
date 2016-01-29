@@ -12,15 +12,16 @@ trckyrslfDirectives.directive('d3Treemap', function($window) {
         scope.$apply();
       });
 
-      var border = 4;
+      var border = 7;
       var w = 0;
       var h = 0;
 
       var dimension = function() {
         var boundRect = element[0].getBoundingClientRect();
+        console.log(boundRect);
         return {
           "w": boundRect.width,
-          "h": $window.innerHeight - boundRect.top - 4
+          "h": $window.innerHeight - boundRect.top - 3
         };
       };
 

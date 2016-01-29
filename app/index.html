@@ -20,7 +20,7 @@
   <body>
     <nav class="navbar navbar-inverse navbar-static-top" ng-controller="SelectionController">
       <div class="container-fluid inactive-menu" ng-hide="menu">
-        <button ng-click="showMenu()">Show</button>
+        <button ng-click="menu=true">Show</button>
       </div>
       <div class="container-fluid active-menu" ng-show="menu">
         <div class="row">
@@ -31,14 +31,20 @@
           <div class="col-md-5">
             <div class="row box" id="filter"><h2>Filter</h2></div>
             <div class="row" id="filter-settings">
-              <div class="col-sm-5 box">
+              <div class="col-sm-2 box">
                 <select ng-model="mapping" ng-change="map(mapping)">
                   <option value="active">Active</option>
                   <option value="inactive">Inactive</option>
                   <option value="total">Total</option>
                 </select>
               </div>
-              <div class="col-sm-7">
+              <div class="col-sm-2 box">
+                FOO
+              </div>
+              <div class="col-sm-2 box">
+                BAR
+              </div>
+              <div class="col-sm-6">
                 <div class="row box" id="timerange"><h3>Time range</h3></div>
                 <div class="row box" id="zoom">
                   <h3>Zoom</h3>
@@ -50,19 +56,19 @@
             </div>
           </div>
           <div class="col-md-4">
-            <div class="row box" id="monitor"><h2 ng-bind="host|host">Nothing selected</h2></div>
+            <div class="row box" id="monitor"><h2>Monitor: <span class="selection" ng-bind="host|host">Nothing selected</span></h2></div>
             <div class="row" id="total">
               <div class="col-xs-4 box">
                 <h3>Share</h3>
-                <p ng-bind="timings.share|number:0|perc">0%</p>
+                <p ng-bind="timings.share|perc">0%</p>
               </div>
               <div class="col-xs-4 box">
                 <h3>hrs</h3>
-                <p ng-bind="timings.total|hrs|number:0">0</p>
+                <p ng-bind="timings.total|hrs">0</p>
               </div>
               <div class="col-xs-2 box">
                 <h3>mins</h3>
-                <p ng-bind="timings.total|min|number:0">0</p>
+                <p ng-bind="timings.total|min">0</p>
               </div>
               <div class="col-xs-2 box">
                 <h3>secs</h3>
@@ -75,12 +81,12 @@
                     <span class="inactive">Inactive</span></h4>
               </div>
               <div class="col-xs-4 box">
-                <h4><span class="active" ng-bind="timings.active|hrs|number:0">0</span> /
-                    <span class="inactive" ng-bind="timings.inactive|hrs|number:0">0</span></h4>
+                <h4><span class="active" ng-bind="timings.active|hrs">0</span> /
+                    <span class="inactive" ng-bind="timings.inactive|hrs">0</span></h4>
               </div>
               <div class="col-xs-2 box">
-                <h4><span class="active" ng-bind="timings.active|min|number:0">0</span> /
-                    <span class="inactive" ng-bind="timings.inactive|min|number:0">0</span></h4>
+                <h4><span class="active" ng-bind="timings.active|min">0</span> /
+                    <span class="inactive" ng-bind="timings.inactive|min">0</span></h4>
               </div>
               <div class="col-xs-2 box">
                 <h4><span class="active" ng-bind="timings.active|sec">0</span> /
