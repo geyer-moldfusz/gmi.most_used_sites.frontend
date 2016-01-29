@@ -16,6 +16,10 @@ module.exports = function(grunt) {
       index: {
         src: 'app/production.html',
         dest: 'build/index.html'
+      },
+      css: {
+        src: 'app/css/app.css',
+        dest: 'build/css/trckyrslf.css'
       }
     },
     concat: {
