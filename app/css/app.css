@@ -36,63 +36,93 @@ body, html {
 #content {
 }
 
-.nav {
-  display: grid;
+nav {
   width: 100%;
   background: #222;
   color: #fff;
   font-family: "CooperHewitt-Book";
   letter-spacing: 0.13em;
   text-transform: uppercase;
-  grid-colums: 120px 60px 60px 60px 240px 120px 120px 60px 60px 120px 120px  1fr;
-  grid-rows: 20px 30px 20px 30px 30px;
 }
 
-.nav h1 {
+nav div.active-menu {
+  height: 200px;
+}
+
+nav h1 {
   font-family: "CooperHewitt-Bold";
   font-size: 0.8em;
+  margin-top: 5px;
 }
 
-.nav h2 {
+nav h2 {
   font-size: 0.8em;
+  margin-top: 5px;
 }
 
-.nav h3 {
+nav h3 {
   font-size: 0.8em;
   color: #999;
+  margin-top: 5px;
 }
 
-.nav h4 {
+nav h4 {
   font-size: 0.6em;
   color: #999;
+  margin-top: 5px;
 }
 
-.nav h4 .active {
+nav h4 .active {
   font-weight: bold;
   color: #fff;
 }
 
-.nav .headline {
-  grid-row-span: 2;
-  grid-column: 1;
-  grid-row: 1;
+nav #headline, nav #search {
+  height: 30%;
 }
 
-.nav .info {
-  grid-row-span: 3;
-  grid-column: 1;
-  grid-row: 3;
+nav #info, nav #links {
+  height: 70%;
 }
 
-.nav .filter {
-  grid-col-span: 4;
-  grid-column: 2;
-  grid-row: 1;
+nav #filter, nav #monitor {
+  height: 20%;
 }
 
-.nav .box {
-  border: 1px solid #000;
-  margin: 0;
+nav #filter-settings {
+  height: 80%;
+}
+
+nav #timerange {
+  height: 50%;
+}
+
+nav #zoom {
+  height: 50%;
+}
+
+nav #total {
+  height: 60%;
+}
+
+nav #detail {
+  height: 20%;
+}
+
+nav input {
+  background: #000;
+  border: 1px solid;
+}
+
+nav .box {
+  border-left: 2px solid #111;
+  border-top: 2px solid #111;
+}
+
+nav > div > .row {
+  height: 100%;
+}
+nav .row > div {
   height: 100%;
 }
 
