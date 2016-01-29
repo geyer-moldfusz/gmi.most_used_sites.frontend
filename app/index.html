@@ -19,71 +19,83 @@
   </head>
   <body>
     <nav class="navbar navbar-inverse navbar-static-top" ng-controller="SelectionController">
-      <div class="container-fluid animate-menu" ng-hide="menu">
+      <div class="container-fluid inactive-menu" ng-hide="menu">
         <button ng-click="showMenu()">Show</button>
       </div>
-      <div class="container-fluid animate-menu" ng-show="menu">
+      <div class="container-fluid active-menu" ng-show="menu">
         <div class="row">
-          <div class="col-md-1"><h1>Trck yrslf</h1></div>
-          <div class="col-md-2"><h2>Filter</h2>
-            <select ng-model="mapping" ng-change="map(mapping)">
-              <option value="active">Active</option>
-              <option value="inactive">Inactive</option>
-              <option value="total">Total</option>
-            </select>
+          <div class="col-md-1">
+            <div class="row box" id="headline"><h1>Trck.yrslf</h1></div>
+            <div class="row box" id="info"><h2>Info</h2></div>
           </div>
-          <div class="col-md-3">
-            <div class="row">
-              <div class="col-xs-12"><h3>Time range</h3></div>
-            </div>
-            <div class="row">
-              <div class="col-xs-12"><h3>Zoom</h3></div>
-              <rzslider
-                  rz-slider-model="zoom.value"
-                  rz-slider-options="zoom.options"></rzslider>
+          <div class="col-md-5">
+            <div class="row box" id="filter"><h2>Filter</h2></div>
+            <div class="row" id="filter-settings">
+              <div class="col-sm-5 box">
+                <select ng-model="mapping" ng-change="map(mapping)">
+                  <option value="active">Active</option>
+                  <option value="inactive">Inactive</option>
+                  <option value="total">Total</option>
+                </select>
+              </div>
+              <div class="col-sm-7">
+                <div class="row box" id="timerange"><h3>Time range</h3></div>
+                <div class="row box" id="zoom">
+                  <h3>Zoom</h3>
+                  <rzslider
+                      rz-slider-model="zoom.value"
+                      rz-slider-options="zoom.options"></rzslider>
+                </div>
+              </div>
             </div>
           </div>
           <div class="col-md-4">
-            <div class="row">
-              <div class="col-xs-12"><h2 ng-bind="selection.host|host">Nothing selected</h2></div>
-            </div>
-            <div class="row">
-              <div class="col-xs-4">
+            <div class="row box" id="monitor"><h2 ng-bind="host|host">Nothing selected</h2></div>
+            <div class="row" id="total">
+              <div class="col-xs-4 box">
                 <h3>Share</h3>
-                <p ng-bind="selection.share|number:0|perc">0%</p>
+                <p ng-bind="timings.share|number:0|perc">0%</p>
               </div>
-              <div class="col-xs-8">
-                <div class="row">
-                  <div class="col-xs-6">
-                    <h3>hrs</h3>
-                    <p ng-bind="selection.time|hrs|number:0">0</p>
-                  </div>
-                  <div class="col-xs-3">
-                    <h3>mins</h3>
-                    <p ng-bind="selection.time|min|number:0">0</p>
-                  </div>
-                  <div class="col-xs-3">
-                    <h3>secs</h3>
-                    <p ng-bind="selection.time|sec">0</p>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-xs-12">
-                    <h3>usage</h3>
-                  </div>
-                </div>
+              <div class="col-xs-4 box">
+                <h3>hrs</h3>
+                <p ng-bind="timings.total|hrs|number:0">0</p>
+              </div>
+              <div class="col-xs-2 box">
+                <h3>mins</h3>
+                <p ng-bind="timings.total|min|number:0">0</p>
+              </div>
+              <div class="col-xs-2 box">
+                <h3>secs</h3>
+                <p ng-bind="timings.total|sec">0</p>
+              </div>
+            </div>
+            <div class="row" id="detail">
+              <div class="col-xs-4 box">
+                <h4><span class="active">Active</span> /
+                    <span class="inactive">Inactive</span></h4>
+              </div>
+              <div class="col-xs-4 box">
+                <h4><span class="active" ng-bind="timings.active|hrs|number:0">0</span> /
+                    <span class="inactive" ng-bind="timings.inactive|hrs|number:0">0</span></h4>
+              </div>
+              <div class="col-xs-2 box">
+                <h4><span class="active" ng-bind="timings.active|min|number:0">0</span> /
+                    <span class="inactive" ng-bind="timings.inactive|min|number:0">0</span></h4>
+              </div>
+              <div class="col-xs-2 box">
+                <h4><span class="active" ng-bind="timings.active|sec">0</span> /
+                    <span class="inactive" ng-bind="timings.inactive|sec">0</span></h4>
               </div>
             </div>
           </div>
           <div class="col-md-2">
-            <div class="row">
-              <div class="col-xs-12">
-                <h2>Search</h2>
-              </div>
+            <div class="row box" id="search">
+              <h2>Search</h2>
+              <input ng-model="term" ng-change="search(term)"></input>
             </div>
-            <div class="row">
-              <div class="col-xs-6"><button ng-click="menu=false">Hide</button><div>
-              <div class="col-xs-6"><a>Cmpr yrslf</a></div>
+            <div class="row" id="links">
+              <div class="col-xs-6 box"><button ng-click="menu=false">Hide</button></div>
+              <div class="col-xs-6 box"><a>Cmpr yrslf</a></div>
             </div>
           </div>
         </div>

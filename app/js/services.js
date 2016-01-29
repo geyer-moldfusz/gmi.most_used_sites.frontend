@@ -9,15 +9,15 @@ trckyrslfServices.factory('VisitSource', ['$resource', function($resource) {
 ]);
 
 
-trckyrslfServices.factory('Synopses', ['VisitSource', 'Selection', function(source, selection) {
-  var synopses = new Map();
+trckyrslfServices.factory('Synopses', ['VisitSource', function(source) {
+  var synmap = new Map();
   var touched = new Date();
 
   source.query(function(visits) {
 
     // merge visit into existing cache data
     var merge = function(visit, synopsis) {
-      function Synopsis(host) {
+      var Synopsis = function(host) {
         this.host = host;
         this.active = 0;
         this.inactive = 0;
@@ -29,7 +29,7 @@ trckyrslfServices.factory('Synopses', ['VisitSource', 'Selection', function(sour
       }
 
       if (!synopsis) {
-        synopsis = new Synopsis(visit.host);
+        var synopsis = new Synopsis(visit.host);
       }
       if (visit.active) {
         synopsis.active += visit.duration;
@@ -42,98 +42,106 @@ trckyrslfServices.factory('Synopses', ['VisitSource', 'Selection', function(sour
     // add visits to cache
     for (var visit of visits['visits']) {
       if (!visit.host) continue;
-      if (synopses.has(visit.host)) {
-        synopses.set(visit.host, merge(visit, synopses.get(visit.host)));
-      } else {
-        synopses.set(visit.host, merge(visit));
-      }
+      synmap.set(visit.host, merge(visit, synmap.get(visit.host)));
     }
 
     // mark changed
-    selection.update({data: synopses});
     touched = Date.now();
   });
 
   return {
-    data: synopses,
+    data: synmap,
     updated: function() {
       return touched;
     }
   };
 }]);
 
+trckyrslfServices.factory('Selection', [function() {
+  var synopses = new Array();
+  var touched = new Date();
 
-trckyrslfServices.factory('Timings', [function() {
+  var share = 100;
+  var total = 0;
+  var active = 0;
+  var inactive = 0;
+  var global_total = 0;
+  var global_active = 0;
+  var global_inactive = 0;
+
+  var host = null;
+  var mapping = "total";
+  var zoom = 100;
+  var search = "";
+
   var quantity = 25;
-  var timings = [];
-
-  var mapping;
-  var start;
-  var _zoom;
 
   var sort = function(m) {
-    mapping = m;
-    timings.sort(function(a, b) {
-      return b[mapping] - a [mapping];
+    synopses.sort(function(a, b) {
+      return b[m] - a [m];
     });
   };
 
-  var setTimings = function(data, m) {
-    timings = data;
-    sort(m);
+  var filter = function(s) {
+    if (s.search(search) == -1) return true;
+    return false;
+  }
+
+  var getSynopses = function() {
+    sort(mapping);
+    var start = Math.floor(
+      (quantity - synopses.length) * zoom / 100 + synopses.length - quantity);
+
+    synopses.map(function(synopsis, i) {
+      if (filter(synopsis.host)) {
+        synopsis.value = 0;
+        if (start + quantity < synopses.length) start++;
+      } else {
+        synopsis.value = synopsis[mapping];
+        if (i < start) synopsis.value = 0;
+        if (i > start + quantity) synopsis.value = 0;
+      }
+      return synopsis;
+    });
+
+    return synopses;
   };
-
-  var getRange = function(zoom) {
-    if (zoom != _zoom) {
-        start = Math.floor((quantity - timings.length) * zoom / 100 + timings.length - quantity);
-        _zoom = zoom;
-    }
-
-    return {
-      "max": timings[start][mapping],
-      "min": timings[start+quantity][mapping]
-    };
-  };
-
-  return {
-    sort: sort,
-    set: setTimings,
-    getRange: getRange
-  };
-}]);
-
-
-trckyrslfServices.factory('Selection', ['Timings', function(timings) {
-  var host = null;
-  var share = 100;
-  var total = 0;
-  var global = 0;
-
-  var mapping = 'total';
-  var zoom = 100;
 
   // XXX split into init and setHost
-  var update = function(synopses) {
-    timings.set([...synopses.data.values()], mapping);
+  var update = function(s) {
+    synopses = s;
 
-    global = 0;
-    for (var synopsis of synopses.data.values()) {
-      global += synopsis.total;
+    global_total = 0;
+    global_active = 0;
+    global_inactive = 0;
+
+    for (var synopsis of synopses) {
+      global_total += synopsis.total;
+      global_active += synopsis.active;
+      global_inactive += synopsis.inactive;
+
+      if (synopsis.host == host) {
+        total = synopsis.total;
+        active = synopsis.active;
+        inactive = synopsis.inactive;
+      }
     }
-    if (host) {
-      total = synopses.data.get(host).total;
-    } else {
-      total = global;
+    if (!host) {
+      total = global_total;
+      active = global_active;
+      inactive = global_inactive;
     }
-    share = 100 * total / global;
+
+    share = 100 * total / global_total;
   };
 
   var getHost = function() {
     return host;
   };
 
-  var setHost = function(new_host) {
-    host = new_host;
+  var setHost = function(h) {
+    host = h;
+    update(synopses);
   };
 
   var getMapping = function() {
@@ -142,7 +150,16 @@ trckyrslfServices.factory('Selection', ['Timings', function(timings) {
 
   var setMapping = function(m) {
     mapping = m;
-    timings.sort(mapping);
+    touched = Date.now();
+  };
+
+  var getSearch = function() {
+    return search;
+  };
+
+  var setSearch = function(s) {
+    search = s;
+    touched = Date.now();
   };
 
   var getZoom = function() {
@@ -151,24 +168,32 @@ trckyrslfServices.factory('Selection', ['Timings', function(timings) {
 
   var setZoom = function(z) {
     zoom = z;
+    touched = Date.now();
   };
 
-  var getData = function() {
+  var getTimings = function() {
     return {
-      host: host,
       share: share,
-      time: Math.floor(total / 10)
+      total: Math.floor(total / 10),
+      active: Math.floor(active / 10),
+      inactive: Math.floor(inactive / 10)
     };
   };
 
   return {
-    update: update,
-    getData: getData,
+    getTimings: getTimings,
     getHost: getHost,
     getMapping: getMapping,
+    getSearch: getSearch,
+    getSynopses: getSynopses,
     getZoom: getZoom,
     setHost: setHost,
     setMapping: setMapping,
-    setZoom: setZoom
+    setSearch: setSearch,
+    setZoom: setZoom,
+    update: update,
+    updated: function() {
+      return touched;
+    }
   };
 }]);

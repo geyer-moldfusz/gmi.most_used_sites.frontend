@@ -10,29 +10,30 @@ trckyrslfControllers.controller('VisitsController', ['$scope', 'VisitSource', fu
 }]);
 
 
-trckyrslfControllers.controller('SynopsesController', ['$scope', 'Synopses', 'Selection', 'Timings', function($scope, synopses, selection, timings) {
+trckyrslfControllers.controller(
+  'SynopsesController', [
+    '$scope', 'Synopses', 'Selection', function($scope, synopses, selection) {
+
   $scope.synopses = synopses;
   $scope.selection = selection;
-  $scope.timings = timings;
+
+  $scope.$watch(function() {
+    return synopses.updated();
+  }, function() {
+    selection.update(Array.from(synopses.data.values()));
+  });
 
   $scope.select = function(host) {
     selection.setHost(host);
-    selection.update(synopses);
     $scope.$apply();
   };
-
-  $scope.$watch(function() {
-    return selection.getMapping();
-  }, function(mapping) {
-    timings.sort(mapping);
-  });
-
 }]);
 
 
 trckyrslfControllers.controller('SelectionController', ['$scope', 'Selection', function($scope, selection) {
   $scope.menu = true;
   $scope.mapping = selection.getMapping();
+  $scope.term = selection.getSearch();
   $scope.zoom = {
     value: selection.getZoom(),
     options: {
@@ -45,16 +46,22 @@ trckyrslfControllers.controller('SelectionController', ['$scope', 'Selection', f
   };
 
   $scope.$watch(function() {
-    return selection.getData().time;
-  }, function(newVal, oldVal) {
-    $scope.selection = selection.getData();
-  });
+    return selection.getTimings();
+  }, function(timings) {
+    $scope.timings = timings;
+  }, true);
+
+  $scope.$watch(function() {
+    return selection.getHost();
+  }, function(host) {
+    $scope.host = host;
+  }, true);
 
   $scope.map = function(mapping) {
     selection.setMapping(mapping) ;
   };
 
-  $scope.showMenu = function() {
-    $scope.menu = true;
-  }
+  $scope.search = function(term) {
+    selection.setSearch(term);
+  };
 }]);
