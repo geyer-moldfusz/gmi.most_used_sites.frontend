@@ -60,9 +60,25 @@ rzslider .rz-pointer{
     z-index:3;
     margin: 0;
     width:7px;
-    height:32px;
+    height:30px;
     cursor:pointer;
-    background-color:#fff;
+    background-color: #fff;
+}
+
+rzslider.timerange .rz-bar{
+    width: unset;
+    left: 5px;
+    right: 5px;
+}
+
+rzslider.timerange .rz-pointer{
+    width:10px;
+    background:url("svg/arrow_timerange.svg") no-repeat;
+    background-size: contain;
+}
+
+rzslider.timerange .rz-pointer:nth-child(odd){
+    transform: scaleX(-1);
 }
 /*
 rzslider .rz-pointer:after{
