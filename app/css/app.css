@@ -150,6 +150,12 @@ rect.selected {
   fill: #ccc;
 }
 
+/** hier selektieren wir den text nach dem selektieren rechteck */
+rect.selected + text {
+    fill: #fff !important;
+    /** noch mehr stuff hier, zb font family oder so **/
+}
+
 text {
   font-family: "CooperHewitt-Medium";
   text-transform: uppercase;
