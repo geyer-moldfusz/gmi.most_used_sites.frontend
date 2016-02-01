@@ -29,7 +29,7 @@
 }
 
 body, html {
-    background-color: #F2F2F2;
+    background-color: #E6E6E6;
     height: 100%;
 }
 
@@ -41,7 +41,7 @@ nav {
   background: #222;
   color: #fff;
   font-family: "CooperHewitt-Book";
-  letter-spacing: 0.13em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
@@ -50,41 +50,123 @@ nav {
 }
 
 nav div.active-menu {
-  height: 200px;
+  height: 250px;
 }
 
 nav h1 {
   font-family: "CooperHewitt-Bold";
-  font-size: 0.8em;
+  font-size: 0.9em;
   margin-top: 5px;
 }
 
 nav h2 {
-  font-size: 0.8em;
+  font-size: 0.9em;
   margin-top: 5px;
 }
 
 nav h2 .selection {
-  font-weight: bold;
+  font-family: "CooperHewitt-Book";
   color: #999;
 }
 
 
 nav h3 {
-  font-size: 0.8em;
+  font-size: 0.9em;
   color: #999;
+  padding: 0;
+  margin-left: 0;
   margin-top: 5px;
 }
 
+
+
 nav h4 {
-  font-size: 0.6em;
+  font-size: 0.9em;
   color: #999;
-  margin-top: 5px;
+  display: block;
+  text-align: center;
+
 }
 
 nav h4 .active {
-  font-weight: bold;
+  font-family: "CooperHewitt-Medium";
   color: #fff;
+}
+
+nav p{
+  font-size: 2.5em;
+  letter-spacing: 0.09;
+  text-align: center;
+}
+/*
+.col-md-1 #headline{
+  background-color: orange;
+
+}*/
+
+.col-md-1 h1{
+  position: absolute;
+  left: 8px;
+}
+
+.col-md-2 h2{
+  position: absolute;
+  left: 8px;
+}
+.col-md-4 h2{
+ position: absolute;
+  left: 8px;
+}
+.col-md-5 h2{
+  position: relative;
+  left: 8px;
+}
+
+.col-xs-4 h3{
+  position: absolute;
+  left: 8px;
+}
+.col-xs-2 h3{
+  position: absolute;
+  left: 8px;
+}
+.col-xs-2 h4{
+  position: relative;
+  top:10%;
+  padding: 0;
+}
+.col-xs-2 p{
+  position: relative;
+  top:35%;
+}
+.col-xs-4 h4{
+  position: relative;
+  top:10%;
+  padding: 0;
+}
+.col-xs-4 p{
+  position: relative;
+  top:35%;
+}
+/*
+.col-sm-2 {
+  left: 0;
+  text-align: center;
+  display: block;
+  padding: 0;
+  margin: 0
+}*/ 
+.col-sm-2 h2{
+  left:0;
+  text-align: center;
+  display: block;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0;
+}
+.col-sm-6 h3{
+  text-align: center;
+  display: block;
 }
 
 nav #headline, nav #search {
@@ -109,7 +191,9 @@ nav #timerange {
 
 nav #zoom {
   height: 50%;
+  display: block;
 }
+
 
 nav #total {
   height: 60%;
@@ -144,45 +228,205 @@ nav .row > div {
 rect {
   cursor: pointer;
   fill: #ffffff;
+  -webkit-transition: fill 0.25s; /* Safari */
+  transition: fill 0.25s;
+}
+
+rect:hover {
+  fill: #222;
+  transition: fill 0.4s
+
+}
+rect:hover + text{
+  fill: #fff !important;
+  font-family: "CooperHewitt-Book";
+  transition: fill 0.12s;
+}
+rect:active {
+  fill: #333;
+  transition: fill 0.12s
 }
 
 rect.selected {
-  fill: #ccc;
+  fill: #222;
 }
-
-/** hier selektieren wir den text nach dem selektieren rechteck */
 rect.selected + text {
-    fill: #fff !important;
-    /** noch mehr stuff hier, zb font family oder so **/
+  fill: #fff !important;
+  font-family: "CooperHewitt-Book";
+  transition: fill 0.12s;
+  /** noch mehr stuff hier, zb font family oder so **/
 }
-
 text {
   font-family: "CooperHewitt-Medium";
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  letter-spacing: 0.13em;
   text-anchor: middle;
+  cursor: pointer;
+
 }
 
 text.font-none {
   display: none;
+
 }
 
 text.font-xs {
   font-size: 8px;
+ 
 }
 
 text.font-s {
-  font-size: 12px;
+  font-size: 14px;
+
 }
 
 text.font-m {
-  font-size: 16px;
+  font-size: 20px;
+
 }
 
 text.font-l {
-  font-size: 20px;
+  font-size: 24px;
 }
 
 text.font-xl {
-  font-size: 24px;
+  font-size: 38px;
+}
+/** hier selektieren wir den text nach dem selektieren rechteck */
+
+#search input {
+  background-color: #222;
+  border: none;
+  width: 95%;
+  height: 60%;
+  margin: 24px 0px;
+  padding: 0 7px;
+  font-size: 2.5em;
+  text-transform: uppercase;
+}
+#info a{
+  position: relative;
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  color: white;
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+  border: 1px solid red;
+  transition: fill 0.4s;
+}
+#info a:hover {
+  background-color: #333;
+  color: #fff;
+  text-decoration: none;
+  transition: fill 0.4s;
+}
+#info a svg{
+  margin: 50px auto 10% auto;
+}
+
+#links a {
+  position: relative;
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  color: white;
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+  border: 1px solid red;
+  transition: fill 0.25s
+}
+#links a:hover {
+  background-color: #333;
+  color: #fff;
+  text-decoration: none;
+  transition: fill 0.4s
+}
+#links a svg{
+  width: 100%;
+  margin: 50px auto 10% auto;
+}
+#links h2{
+  width: 100%;
+  text-align: center;
+  display: block;
+  margin: 8px 0 0 -7px;
+}
+/*.col-md-1 h2{
+  left:0;
+  text-align: center;
+  display: block;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0;
+}*/
+#filter-settings a{
+  position: relative;
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  color: white;
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+  margin: 0;
+  padding:0;
+  border: 1px solid red;
+  transition: fill 0.25s;
+}
+
+#filter-settings a:hover {
+  background-color: #333;
+  color: #fff;
+  text-decoration: none;
+  transition: fill 0.4s;
+}
+#filter-settings a h2{
+  width: 100%;
+  height: 100%;
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  margin: 8px 0 0 0;
+  padding: 0;
+}
+#switch{
+  display: block;
+  width: 100%;
+  text-align: center;
+  margin: 30% auto;
+}
+#switch-wrapper {
+  margin-top: 20px; 
+}
+#triangle {
+  height: 100%;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  display: block;
+}
+#triangle-white {
+  top:-15px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 15px 250px 15px 0;
+  border-color: transparent #fff transparent transparent;
+}
+#triangle-grey {
+  top:-14px;
+  left: 5px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 13px 246px 13px 0;
+  border-color: transparent #222 transparent transparent;
 }
