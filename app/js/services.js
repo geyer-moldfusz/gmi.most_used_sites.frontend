@@ -74,6 +74,10 @@ trckyrslfServices.factory('Selection', [function() {
   var zoom = 100;
   var fakeZoom = 0;
   var search = "";
+  var timeRange = {
+    min: null,
+    max: null
+  };
 
   var quantity = 25;
 
@@ -163,6 +167,11 @@ trckyrslfServices.factory('Selection', [function() {
     touched = Date.now();
   };
 
+  var setTimeRange = function(min, max) {
+    timeRange.min = min;
+    timeRange.max = max;
+  };
+
   var getZoom = function() {
     return fakeZoom;
   };
@@ -193,6 +202,7 @@ trckyrslfServices.factory('Selection', [function() {
     setHost: setHost,
     setMapping: setMapping,
     setSearch: setSearch,
+    setTimeRange: setTimeRange,
     setZoom: setZoom,
     update: update,
     updated: function() {

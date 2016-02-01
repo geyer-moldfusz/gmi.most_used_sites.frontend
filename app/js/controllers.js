@@ -44,6 +44,19 @@ trckyrslfControllers.controller('SelectionController', ['$scope', 'Selection', f
       ceil: 100
     }
   };
+  $scope.sliderTimeRange = {
+    options: {
+      id: 'timerange',
+      onChange: function(sliderId, min, max) {
+        selection.setTimeRange(min, max);
+      },
+      floor: 0,
+      ceil: 24,
+      step: 1
+    },
+    minValue: 0,
+    maxValue: 24
+  };
 
   $scope.$watch(function() {
     return selection.getTimings();
