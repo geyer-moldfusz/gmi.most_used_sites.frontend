@@ -32,6 +32,7 @@ trckyrslfControllers.controller(
 
 trckyrslfControllers.controller('SelectionController', ['$scope', 'Selection', function($scope, selection) {
   $scope.menu = true;
+  $scope.filter = true;
   $scope.mapping = selection.getMapping();
   $scope.term = selection.getSearch();
   $scope.zoom = {

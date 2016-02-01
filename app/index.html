@@ -41,41 +41,45 @@
             <div class="row box" id="filter"><h2>Filter</h2></div>
             <div class="row" id="filter-settings">
               <div class="col-sm-2 box">
-               <a>
+                <a href="" ng-click="filter=!filter">
                 <div id="switch-wrapper">
                   <h2>On</h2>
-                  <svg version="1.1" id="switch" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="42px" height="64.167px" viewBox="8.875 -2.25 42 64.167" enable-background="new 8.875 -2.25 42 64.167" xml:space="preserve">
-                    <path fill="none" stroke="#FFFFFF" stroke-width="1.2052" d="M50.349,18.676c-0.186-11.137-9.307-20.14-20.485-20.14 c-11.215,0-20.353,9.056-20.488,20.237c0,0.085,0,22.172,0.001,22.28c0.178,11.147,9.299,20.16,20.487,20.16 c11.192,0,20.318-9.022,20.488-20.177L50.349,18.676z"/>
-                    <path fill="#FFFFFF" stroke="#FFFFFF" stroke-width="1.2052" d="M50.375,19.025c0,11.297-9.192,20.488-20.487,20.488 c-11.298,0-20.488-9.191-20.488-20.488S18.59-1.462,29.888-1.462C41.183-1.462,50.375,7.728,50.375,19.025"/>
+                  <svg version="1.1" id="Hide" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="42.375px" height="64.167px" viewBox="-0.375 0 42.375 64.167" enable-background="new -0.375 0 42.375 64.167" xml:space="preserve">
+                    <g>
+                      <path fill="none" stroke="#FFFFFF" stroke-width="1.2052" d="M41.287,20.885C41.1,9.749,31.979,0.746,20.8,0.746 c-11.214,0-20.353,9.056-20.487,20.237c0,0.085,0,22.171,0.001,22.281C0.492,54.41,9.612,63.421,20.8,63.421 c11.194,0,20.319-9.021,20.489-20.176L41.287,20.885z"/> 
+                      <path ng-show="filter" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="1.2052" d="M41.313,21.234c0,11.297-9.191,20.488-20.487,20.488 c-11.299,0-20.488-9.191-20.488-20.488S9.526,0.748,20.825,0.748C32.121,0.748,41.313,9.938,41.313,21.234"/>
+                      <path ng-hide="filter" fill="none" stroke="#FFFFFF" stroke-width="1.2052" d="M0.313,42.933c0-11.297,9.191-20.488,20.487-20.488 c11.299,0,20.488,9.191,20.488,20.488c0,11.297-9.189,20.486-20.488,20.486C9.504,63.419,0.313,54.23,0.313,42.933"/>
+                    </g>
                   </svg>
                   <h2>Off</h2>
                 </div>
-                <!--<select ng-model="mapping" ng-change="map(mapping)">
-                  <option value="active">Active</option>
-                  <option value="inactive">Inactive</option>
-                  <option value="total">Total</option>
-                </select>-->
-               </a>
+                </a>
               </div>
-              <div class="col-sm-2 box">
+              <div class="col-sm-2 box" ng-class="{disabled: !filter}">
                 <a>
                   <div id="switch-wrapper">
                   <h2>Show</h2>
-                  <svg version="1.1" id="switch" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="42px" height="64.167px" viewBox="8.875 -2.25 42 64.167" enable-background="new 8.875 -2.25 42 64.167" xml:space="preserve">
-                    <path fill="none" stroke="#FFFFFF" stroke-width="1.2052" d="M50.349,18.676c-0.186-11.137-9.307-20.14-20.485-20.14 c-11.215,0-20.353,9.056-20.488,20.237c0,0.085,0,22.172,0.001,22.28c0.178,11.147,9.299,20.16,20.487,20.16 c11.192,0,20.318-9.022,20.488-20.177L50.349,18.676z"/>
-                    <path fill="#FFFFFF" stroke="#FFFFFF" stroke-width="1.2052" d="M50.375,19.025c0,11.297-9.192,20.488-20.487,20.488 c-11.298,0-20.488-9.191-20.488-20.488S18.59-1.462,29.888-1.462C41.183-1.462,50.375,7.728,50.375,19.025"/>
+                  <svg version="1.1" id="Hide" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="42.375px" height="64.167px" viewBox="-0.375 0 42.375 64.167" enable-background="new -0.375 0 42.375 64.167" xml:space="preserve">
+                    <g>
+                      <path fill="none" stroke="#FFFFFF" stroke-width="1.2052" d="M41.287,20.885C41.1,9.749,31.979,0.746,20.8,0.746 c-11.214,0-20.353,9.056-20.487,20.237c0,0.085,0,22.171,0.001,22.281C0.492,54.41,9.612,63.421,20.8,63.421 c11.194,0,20.319-9.021,20.489-20.176L41.287,20.885z"/> 
+                      <path ng-show="filter" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="1.2052" d="M41.313,21.234c0,11.297-9.191,20.488-20.487,20.488 c-11.299,0-20.488-9.191-20.488-20.488S9.526,0.748,20.825,0.748C32.121,0.748,41.313,9.938,41.313,21.234"/>
+                      <path ng-hide="filter" fill="none" stroke="#FFFFFF" stroke-width="1.2052" d="M0.313,42.933c0-11.297,9.191-20.488,20.487-20.488 c11.299,0,20.488,9.191,20.488,20.488c0,11.297-9.189,20.486-20.488,20.486C9.504,63.419,0.313,54.23,0.313,42.933"/>
+                    </g>
                   </svg>
                   <h2>Work</h2>
                 </div>
                 </a>
               </div>
-              <div class="col-sm-2 box">
+              <div class="col-sm-2 box" ng-class="{disabled: !filter}">
                 <a>
                   <div id="switch-wrapper">
                   <h2>Show</h2>
-                  <svg version="1.1" id="switch" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="42px" height="64.167px" viewBox="8.875 -2.25 42 64.167" enable-background="new 8.875 -2.25 42 64.167" xml:space="preserve">
-                    <path fill="none" stroke="#FFFFFF" stroke-width="1.2052" d="M50.349,18.676c-0.186-11.137-9.307-20.14-20.485-20.14 c-11.215,0-20.353,9.056-20.488,20.237c0,0.085,0,22.172,0.001,22.28c0.178,11.147,9.299,20.16,20.487,20.16 c11.192,0,20.318-9.022,20.488-20.177L50.349,18.676z"/>
-                    <path fill="#FFFFFF" stroke="#FFFFFF" stroke-width="1.2052" d="M50.375,19.025c0,11.297-9.192,20.488-20.487,20.488 c-11.298,0-20.488-9.191-20.488-20.488S18.59-1.462,29.888-1.462C41.183-1.462,50.375,7.728,50.375,19.025"/>
+                  <svg version="1.1" id="Hide" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="42.375px" height="64.167px" viewBox="-0.375 0 42.375 64.167" enable-background="new -0.375 0 42.375 64.167" xml:space="preserve">
+                    <g>
+                      <path fill="none" stroke="#FFFFFF" stroke-width="1.2052" d="M41.287,20.885C41.1,9.749,31.979,0.746,20.8,0.746 c-11.214,0-20.353,9.056-20.487,20.237c0,0.085,0,22.171,0.001,22.281C0.492,54.41,9.612,63.421,20.8,63.421 c11.194,0,20.319-9.021,20.489-20.176L41.287,20.885z"/> 
+                      <path ng-show="filter" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="1.2052" d="M41.313,21.234c0,11.297-9.191,20.488-20.487,20.488 c-11.299,0-20.488-9.191-20.488-20.488S9.526,0.748,20.825,0.748C32.121,0.748,41.313,9.938,41.313,21.234"/>
+                      <path ng-hide="filter" fill="none" stroke="#FFFFFF" stroke-width="1.2052" d="M0.313,42.933c0-11.297,9.191-20.488,20.487-20.488 c11.299,0,20.488,9.191,20.488,20.488c0,11.297-9.189,20.486-20.488,20.486C9.504,63.419,0.313,54.23,0.313,42.933"/>
+                    </g>
                   </svg>
                   <h2>Leisure</h2>
                 </div>

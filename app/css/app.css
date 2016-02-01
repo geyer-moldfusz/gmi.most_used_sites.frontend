@@ -367,24 +367,19 @@ text.font-xl {
   padding: 0;
 }*/
 #filter-settings a{
-  position: relative;
+  position: absolute;
   display: block;
-  text-align: center;
-  text-decoration: none;
-  color: white;
+  left: 0;
   height: 100%;
   width: 100%;
-  cursor: pointer;
-  margin: 0;
-  padding:0;
-  border: 1px solid red;
+  text-align: center;
+  text-decoration: none;
   transition: fill 0.25s;
 }
 
 #filter-settings a:hover {
   background-color: #333;
   color: #fff;
-  text-decoration: none;
   transition: fill 0.4s;
 }
 #filter-settings a h2{
@@ -394,8 +389,11 @@ text.font-xl {
   text-align: center;
   text-decoration: none;
   color: #fff;
-  margin: 8px 0 0 0;
+  margin: 8px 0 8px 0;
   padding: 0;
+}
+#filter-settings .disabled {
+  background: #f00;
 }
 #switch{
   display: block;
