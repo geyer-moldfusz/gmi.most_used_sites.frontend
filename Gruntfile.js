@@ -31,7 +31,7 @@ module.exports = function(grunt) {
     cssmin: {
       trckyrslf: {
         files: {
-          'build/css/trckyrslf.min.css': ['app/css/app.css']
+          'build/css/trckyrslf.min.css': ['app/css/app.css', 'app/css/slider.css']
         }
       }
     },
