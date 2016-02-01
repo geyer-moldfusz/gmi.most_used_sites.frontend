@@ -42,6 +42,10 @@ trckyrslfDirectives.directive('d3Treemap', function($window) {
         return "font-xl";
       };
 
+      var selected = function(d) {
+          return (d.host == scope.selection.getHost());
+      };
+
       var treemap = d3.layout.treemap()
         .children(function(n) {
           if (n.parent) return null;
@@ -111,7 +115,7 @@ trckyrslfDirectives.directive('d3Treemap', function($window) {
 
         d3.select(element[0]).selectAll("g.cell").select("rect")
           .attr("class", function(d) {
-            return (d.host == scope.selection.getHost()) ? "selected" : "de-selected";
+            return selected(d) ? "selected" : "de-selected";
           });
       }
 
@@ -125,7 +129,16 @@ trckyrslfDirectives.directive('d3Treemap', function($window) {
           .attr("width", w)
           .attr("height", h);
 
-        var t = svg.selectAll("g.cell").transition()
+        var t = svg.selectAll("g.cell")
+          .on("click", function(d) {
+            if (selected(d)) {
+              select(null);
+            } else {
+              select(d.host);
+            }
+          });
+
+        t.transition()
           .duration(750)
           .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
 
