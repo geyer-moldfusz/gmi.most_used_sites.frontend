@@ -36,7 +36,7 @@ rzslider .rz-bar-wrapper{
     left:0;
     z-index:1;
     width:100%;
-    height:32px;
+    height:30px;
     padding-top:14px;
     margin-top:-5px;
     box-sizing:border-box
@@ -47,7 +47,6 @@ rzslider .rz-bar-wrapper.rz-draggable{
 rzslider .rz-bar{
     left:0;
     z-index:1;
-    width:100%;
     height:1px;
     background:#fff;
 }
@@ -65,20 +64,34 @@ rzslider .rz-pointer{
     background-color: #fff;
 }
 
+rzslider.timerange .rz-bar-wrapper{
+    height:60px;
+    padding-top: 28px;
+}
+
 rzslider.timerange .rz-bar{
-    width: unset;
-    left: 5px;
-    right: 5px;
+    left: 10px;
+    right: 10px;
 }
 
 rzslider.timerange .rz-pointer{
-    width:10px;
+    width:20px;
+    height:60px;
     background:url("svg/arrow_timerange.svg") no-repeat;
     background-size: contain;
 }
 
 rzslider.timerange .rz-pointer:nth-child(odd){
     transform: scaleX(-1);
+}
+
+rzslider.zoom .rz-bar-wrapper {
+    background:url("svg/zoom_slider.svg") no-repeat;
+    background-size: contain;
+}
+rzslider.zoom .rz-bar{
+    left: 0;
+    right: 0;
 }
 /*
 rzslider .rz-pointer:after{
