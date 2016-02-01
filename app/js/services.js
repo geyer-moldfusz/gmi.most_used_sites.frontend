@@ -72,6 +72,7 @@ trckyrslfServices.factory('Selection', [function() {
   var host = null;
   var mapping = "total";
   var zoom = 100;
+  var fakeZoom = 0;
   var search = "";
 
   var quantity = 25;
@@ -163,11 +164,13 @@ trckyrslfServices.factory('Selection', [function() {
   };
 
   var getZoom = function() {
-    return zoom;
+    return fakeZoom;
   };
 
   var setZoom = function(z) {
-    zoom = z;
+    // switch the values (slider starts at 0, zoom is 100)
+    zoom = Math.abs(z - 100);
+    fakeZoom = z;
     touched = Date.now();
   };
 
