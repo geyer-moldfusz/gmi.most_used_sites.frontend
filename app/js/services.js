@@ -1,7 +1,7 @@
 var trckyrslfServices = angular.module('trckyrslfServices', ['ngResource']);
 
 trckyrslfServices.factory('VisitSource', ['$resource', function($resource) {
-    return $resource('https://api.mostusedsites.guerilla-it.net/visits', {}, {
+    return $resource('https://api.mostusedsites.guerilla-it.net/visits/:uuid', {}, {
 //    return $resource('visits.json', {}, {
       query: {method:'GET', timeout: 120000}
     });
@@ -13,44 +13,48 @@ trckyrslfServices.factory('Synopses', ['VisitSource', function(source) {
   var synmap = new Map();
   var touched = new Date();
 
-  source.query(function(visits) {
+  var load = function(uuid) {
+    console.log(uuid);
+    source.query({uuid: uuid}, function(visits) {
 
-    // merge visit into existing cache data
-    var merge = function(visit, synopsis) {
-      var Synopsis = function(host) {
-        this.host = host;
-        this.active = 0;
-        this.inactive = 0;
-        Object.defineProperty(this, 'total', {
-          get: function() {
-            return this.active + this.inactive;
-          }
-        });
+      // merge visit into existing cache data
+      var merge = function(visit, synopsis) {
+        var Synopsis = function(host) {
+          this.host = host;
+          this.active = 0;
+          this.inactive = 0;
+          Object.defineProperty(this, 'total', {
+            get: function() {
+              return this.active + this.inactive;
+            }
+          });
+        }
+
+        if (!synopsis) {
+          var synopsis = new Synopsis(visit.host);
+        }
+        if (visit.active) {
+          synopsis.active += visit.duration;
+        } else {
+          synopsis.inactive += visit.duration;
+        }
+        return synopsis;
       }
 
-      if (!synopsis) {
-        var synopsis = new Synopsis(visit.host);
+      // add visits to cache
+      for (var visit of visits['visits']) {
+        if (!visit.host) continue;
+        synmap.set(visit.host, merge(visit, synmap.get(visit.host)));
       }
-      if (visit.active) {
-        synopsis.active += visit.duration;
-      } else {
-        synopsis.inactive += visit.duration;
-      }
-      return synopsis;
-    }
 
-    // add visits to cache
-    for (var visit of visits['visits']) {
-      if (!visit.host) continue;
-      synmap.set(visit.host, merge(visit, synmap.get(visit.host)));
-    }
-
-    // mark changed
-    touched = Date.now();
-  });
+      // mark changed
+      touched = Date.now();
+    });
+  };
 
   return {
     data: synmap,
+    load: load,
     updated: function() {
       return touched;
     }

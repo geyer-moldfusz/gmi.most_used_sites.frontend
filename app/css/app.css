@@ -209,6 +209,7 @@ nav input {
 }
 
 nav .box {
+  position: relative;
   border-left: 2px solid #111;
   border-top: 2px solid #111;
 }
@@ -305,17 +306,16 @@ text.font-xl {
   text-transform: uppercase;
 }
 #info a{
-  position: relative;
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
   display: block;
   text-align: center;
   text-decoration: none;
   color: white;
-  height: 100%;
   width: 100%;
-  cursor: pointer;
-  margin: 0;
-  padding: 0;
-  border: 1px solid red;
   transition: fill 0.4s;
 }
 #info a:hover {
@@ -328,26 +328,6 @@ text.font-xl {
   margin: 50px auto 10% auto;
 }
 
-#links a {
-  position: relative;
-  display: block;
-  text-align: center;
-  text-decoration: none;
-  color: white;
-  height: 100%;
-  width: 100%;
-  cursor: pointer;
-  margin: 0;
-  padding: 0;
-  border: 1px solid red;
-  transition: fill 0.25s
-}
-#links a:hover {
-  background-color: #333;
-  color: #fff;
-  text-decoration: none;
-  transition: fill 0.4s
-}
 #links a svg{
   width: 100%;
   margin: 50px auto 10% auto;
@@ -366,18 +346,22 @@ text.font-xl {
   margin: 0 auto;
   padding: 0;
 }*/
-#filter-settings a{
+#filter-settings a, #links a {
   position: absolute;
   display: block;
+  color: #fff;
   left: 0;
-  height: 100%;
-  width: 100%;
+  right: 0;
+  top: 0;
+  bottom: 0;
   text-align: center;
   text-decoration: none;
   transition: fill 0.25s;
 }
-
-#filter-settings a:hover {
+#links a.cmpr {
+  right: 1px;
+}
+#filter-settings a:hover, #links a:hover {
   background-color: #333;
   color: #fff;
   transition: fill 0.4s;

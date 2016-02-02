@@ -9,9 +9,20 @@ trckyrslfControllers.controller('VisitsController', ['$scope', 'VisitSource', fu
   });
 }]);
 
+trckyrslfControllers.controller('NoUUIDController', [
+    '$scope', 'Synopses', function($scope, synopses) {
+  synopses.load();
+}]);
 
-trckyrslfControllers.controller(
-  'SynopsesController', [
+trckyrslfControllers.controller('UUIDController', [
+    '$scope', 'Synopses', function($scope, synopses) {
+
+  $scope.uuid = function(uuid) {
+    synopses.load(uuid);
+  };
+}]);
+
+trckyrslfControllers.controller('SynopsesController', [
     '$scope', 'Synopses', 'Selection', function($scope, synopses, selection) {
 
   $scope.synopses = synopses;
@@ -58,6 +69,10 @@ trckyrslfControllers.controller('SelectionController', ['$scope', 'Selection', f
     minValue: 0,
     maxValue: 24
   };
+
+  $scope.$on("message", function() {
+    console.log("message");
+  });
 
   $scope.$watch(function() {
     return selection.getTimings();

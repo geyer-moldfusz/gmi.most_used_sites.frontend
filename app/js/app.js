@@ -16,10 +16,15 @@ trckyrslfApp.config(['$routeProvider',
       }).
       when('/synopses', {
         templateUrl: 'partials/synopes-list.html',
-        //controller: 'SynopsesController'
+        controller: 'NoUUIDController'
       }).
       otherwise({
-        redirectTo: '/visits'
+        templateUrl: 'partials/synopes-list.html',
+        controller: 'UUIDController'
       });
   }
 ]);
+
+window.addEventListener('message', function(event) {
+  angular.element($("#content")).scope().uuid(event.data);
+});
