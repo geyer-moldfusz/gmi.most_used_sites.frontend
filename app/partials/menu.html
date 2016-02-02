@@ -35,30 +35,30 @@
             </div>
             </a>
           </div>
-          <div class="col-sm-2 box" ng-class="{disabled: !filter}">
+          <div class="col-sm-2 box disabled">
             <a>
               <div id="switch-wrapper">
               <h2>Show</h2>
               <svg version="1.1" id="Hide" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="42.375px" height="64.167px" viewBox="-0.375 0 42.375 64.167" enable-background="new -0.375 0 42.375 64.167" xml:space="preserve">
                 <g>
                   <path fill="none" stroke="#FFFFFF" stroke-width="1.2052" d="M41.287,20.885C41.1,9.749,31.979,0.746,20.8,0.746 c-11.214,0-20.353,9.056-20.487,20.237c0,0.085,0,22.171,0.001,22.281C0.492,54.41,9.612,63.421,20.8,63.421 c11.194,0,20.319-9.021,20.489-20.176L41.287,20.885z"/> 
-                  <path ng-show="filter" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="1.2052" d="M41.313,21.234c0,11.297-9.191,20.488-20.487,20.488 c-11.299,0-20.488-9.191-20.488-20.488S9.526,0.748,20.825,0.748C32.121,0.748,41.313,9.938,41.313,21.234"/>
-                  <path ng-hide="filter" fill="none" stroke="#FFFFFF" stroke-width="1.2052" d="M0.313,42.933c0-11.297,9.191-20.488,20.487-20.488 c11.299,0,20.488,9.191,20.488,20.488c0,11.297-9.189,20.486-20.488,20.486C9.504,63.419,0.313,54.23,0.313,42.933"/>
+                  <path ng-show="false" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="1.2052" d="M41.313,21.234c0,11.297-9.191,20.488-20.487,20.488 c-11.299,0-20.488-9.191-20.488-20.488S9.526,0.748,20.825,0.748C32.121,0.748,41.313,9.938,41.313,21.234"/>
+                  <path fill="none" stroke="#FFFFFF" stroke-width="1.2052" d="M0.313,42.933c0-11.297,9.191-20.488,20.487-20.488 c11.299,0,20.488,9.191,20.488,20.488c0,11.297-9.189,20.486-20.488,20.486C9.504,63.419,0.313,54.23,0.313,42.933"/>
                 </g>
               </svg>
               <h2>Work</h2>
             </div>
             </a>
           </div>
-          <div class="col-sm-2 box" ng-class="{disabled: !filter}">
+          <div class="col-sm-2 box disabled">
             <a>
               <div id="switch-wrapper">
               <h2>Show</h2>
               <svg version="1.1" id="Hide" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="42.375px" height="64.167px" viewBox="-0.375 0 42.375 64.167" enable-background="new -0.375 0 42.375 64.167" xml:space="preserve">
                 <g>
                   <path fill="none" stroke="#FFFFFF" stroke-width="1.2052" d="M41.287,20.885C41.1,9.749,31.979,0.746,20.8,0.746 c-11.214,0-20.353,9.056-20.487,20.237c0,0.085,0,22.171,0.001,22.281C0.492,54.41,9.612,63.421,20.8,63.421 c11.194,0,20.319-9.021,20.489-20.176L41.287,20.885z"/> 
-                  <path ng-show="filter" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="1.2052" d="M41.313,21.234c0,11.297-9.191,20.488-20.487,20.488 c-11.299,0-20.488-9.191-20.488-20.488S9.526,0.748,20.825,0.748C32.121,0.748,41.313,9.938,41.313,21.234"/>
-                  <path ng-hide="filter" fill="none" stroke="#FFFFFF" stroke-width="1.2052" d="M0.313,42.933c0-11.297,9.191-20.488,20.487-20.488 c11.299,0,20.488,9.191,20.488,20.488c0,11.297-9.189,20.486-20.488,20.486C9.504,63.419,0.313,54.23,0.313,42.933"/>
+                  <path ng-show="false" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="1.2052" d="M41.313,21.234c0,11.297-9.191,20.488-20.487,20.488 c-11.299,0-20.488-9.191-20.488-20.488S9.526,0.748,20.825,0.748C32.121,0.748,41.313,9.938,41.313,21.234"/>
+                  <path  fill="none" stroke="#FFFFFF" stroke-width="1.2052" d="M0.313,42.933c0-11.297,9.191-20.488,20.487-20.488 c11.299,0,20.488,9.191,20.488,20.488c0,11.297-9.189,20.486-20.488,20.486C9.504,63.419,0.313,54.23,0.313,42.933"/>
                 </g>
               </svg>
               <h2>Leisure</h2>
@@ -66,7 +66,7 @@
             </a>
           </div>
           <div class="col-sm-6">
-            <div class="row box" id="timerange" ng-class="{disabled: !filter}">
+            <div class="row box disabled" id="timerange">
               <h3>Time range</h3>
               <rzslider class="timerange"
                 rz-slider-model="sliderTimeRange.minValue"
@@ -106,19 +106,19 @@
         </div>
         <div class="row" id="detail">
           <div class="col-xs-4 box">
-            <h4><!--<span class="active">Total</span> /-->
-                <span class="inactive">Inactive Tab</span></h4>
+            <h4><span class="active">Total</span> /
+                <span class="inactive">Inactive</span></h4>
           </div>
           <div class="col-xs-4 box">
-            <h4><!--<span class="active" ng-bind="timings.total|hrs">0</span> /-->
+            <h4><span class="active" ng-bind="timings.total|hrs">0</span> /
                 <span class="inactive" ng-bind="timings.inactive|hrs">0</span></h4>
           </div>
           <div class="col-xs-2 box">
-            <h4><!--<span class="active" ng-bind="timings.total|min">0</span> /-->
+            <h4><span class="active" ng-bind="timings.total|min">0</span> /
                 <span class="inactive" ng-bind="timings.inactive|min">0</span></h4>
           </div>
           <div class="col-xs-2 box">
-            <h4><!--<span class="active" ng-bind="timings.total|sec">0</span> /-->
+            <h4><span class="active" ng-bind="timings.total|sec">0</span> /
                 <span class="inactive" ng-bind="timings.inactive|sec">0</span></h4>
           </div>
         </div>
@@ -144,11 +144,13 @@
            </div>
           <div class="col-xs-6 box">
             <a href="#/cmpr" class="cmpr">
-              <svg version="1.1" id="cmpr" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="42px" height="42px" viewBox="8.875 8.875 42 42" enable-background="new 8.875 8.875 42 42" xml:space="preserve">
-                <circle fill="#FFFFFF" stroke="#222222" stroke-width="1.4333" cx="29.875" cy="29.875" r="21.5"/>
-                <polygon fill="#222222" points="9.694,22.365 35.995,22.365 14.304,44.057 15.694,45.445 37.384,23.753 37.384,49.89 39.33,49.024 39.33,20.42 10.71,20.42 "/>
+            <svg version="1.1" id="Hide" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="42px" height="42px" viewBox="0 0 42 42" enable-background="new 0 0 42 42" xml:space="preserve">
+              <g>
+                <circle fill="#FFFFFF" stroke="#222222" stroke-width="1.4333" cx="21" cy="21" r="21.5"/>
+                <polygon fill="#222222" points="41.181,28.51 14.88,28.51 36.57,6.818 35.182,5.43 13.491,27.122 13.491,0.984 11.545,1.852 11.545,30.455 40.165,30.455 	"/>
+              </g>
               </svg>
-              <h2>Cmpr yrslf</h2>
+              <h2>Trck yrslf</h2>
             </a>
           </div>
         </div>

@@ -20,7 +20,8 @@ trckyrslfApp.config(['$routeProvider',
       }).
       otherwise({
         templateUrl: 'partials/synopes-list.html',
-        controller: 'UUIDController'
+        controller: 'NoUUIDController'
+//        controller: 'UUIDController'
       });
   }
 ]);

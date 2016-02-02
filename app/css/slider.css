@@ -87,7 +87,7 @@ rzslider.timerange .rz-pointer:nth-child(odd){
 
 rzslider.zoom .rz-bar-wrapper {
     background:url("svg/zoom_slider.svg") no-repeat;
-    background-size: contain;
+    background-size: 100% 100%;
 }
 rzslider.zoom .rz-bar{
     left: 0;
