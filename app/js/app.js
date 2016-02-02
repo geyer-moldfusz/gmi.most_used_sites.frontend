@@ -14,7 +14,7 @@ trckyrslfApp.config(['$routeProvider',
         templateUrl: 'partials/visits-list.html',
         controller: 'VisitsController'
       }).
-      when('/synopses', {
+      when('/cmpr', {
         templateUrl: 'partials/synopes-list.html',
         controller: 'NoUUIDController'
       }).

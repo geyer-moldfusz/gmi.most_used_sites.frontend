@@ -80,18 +80,18 @@ trckyrslfDirectives.directive('d3Treemap', function($window) {
 
         treemap.size([w, h]);
 
+        d3.select(element[0]).selectAll("svg").remove();
+
         var nodes = treemap.nodes({data: data})
           .filter(function(d) { return (d.depth == 1); });
 
-        var svg = d3.select(element[0])
-          .append("svg:svg")
+        var svg = d3.select(element[0]).append("svg:svg")
             .attr("width", w)
             .attr("height", h)
           .append("svg:g")
               .attr("transform", "translate(.5,.5)");
 
-        var cell = svg.selectAll("g")
-            .data(nodes)
+        var cell = svg.selectAll("g").data(nodes)
           .enter().append("svg:g")
               .attr("class", "cell")
               .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
