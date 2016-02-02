@@ -26,5 +26,6 @@ trckyrslfApp.config(['$routeProvider',
 ]);
 
 window.addEventListener('message', function(event) {
+  while (!angular.element($("#content")).scope()) {}
   angular.element($("#content")).scope().uuid(event.data);
 });
