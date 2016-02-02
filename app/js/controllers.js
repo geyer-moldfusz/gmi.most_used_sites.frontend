@@ -11,11 +11,30 @@ trckyrslfControllers.controller('VisitsController', ['$scope', 'VisitSource', fu
 
 trckyrslfControllers.controller('NoUUIDController', [
     '$scope', 'Synopses', function($scope, synopses) {
+
+  $scope.ready = false;
+  $scope.$watch(function() {
+    return synopses.updated();
+  }, function() {
+    if (synopses.data.size) {
+      $scope.ready = true;
+    }
+  });
+
   synopses.load();
 }]);
 
 trckyrslfControllers.controller('UUIDController', [
     '$scope', 'Synopses', function($scope, synopses) {
+
+  $scope.ready = false;
+  $scope.$watch(function() {
+    return synopses.updated();
+  }, function() {
+    if (synopses.data.size) {
+      $scope.ready = true;
+    }
+  });
 
   $scope.uuid = function(uuid) {
     synopses.load(uuid);
