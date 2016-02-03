@@ -1,7 +1,7 @@
 var trckyrslfServices = angular.module('trckyrslfServices', ['ngResource']);
 
 trckyrslfServices.factory('VisitSource', ['$resource', function($resource) {
-    return $resource('https://api.mostusedsites.guerilla-it.net/visits/:uuid', {}, {
+    return $resource('https://api.mostusedsites.guerilla-it.net/visits/:uuid/:since', {}, {
 //    return $resource('visits.json', {}, {
       query: {method:'GET', timeout: 120000}
     });
@@ -11,11 +11,19 @@ trckyrslfServices.factory('VisitSource', ['$resource', function($resource) {
 
 trckyrslfServices.factory('Synopses', ['VisitSource', function(source) {
   var synmap = new Map();
-  var touched = new Date();
+  var touched = new Date(0);
+  var since = null;
 
-  var load = function(uuid) {
-    console.log(uuid);
-    source.query({uuid: uuid}, function(visits) {
+  var load = function(uuid, update) {
+    if (uuid) {
+      (update) ? since = touched.getTime() : since = null;
+    } else {
+      // XXX no uuid, no since. refactor when backend is able to handle since
+      // without given uuid
+      since = null;
+    }
+
+    source.query({uuid: uuid, since: since}, function(visits) {
 
       // merge visit into existing cache data
       var merge = function(visit, synopsis) {
@@ -38,6 +46,7 @@ trckyrslfServices.factory('Synopses', ['VisitSource', function(source) {
         } else {
           synopsis.inactive += visit.duration;
         }
+        since = Math.max(since, visit.visited_at);
         return synopsis;
       }
 
@@ -48,7 +57,7 @@ trckyrslfServices.factory('Synopses', ['VisitSource', function(source) {
       }
 
       // mark changed
-      touched = Date.now();
+      touched = new Date(since);
     });
   };
 
