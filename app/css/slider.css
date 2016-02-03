@@ -33,13 +33,13 @@ rzslider .rz-base{
     padding:0
 }
 rzslider .rz-bar-wrapper{
-    left:0;
-    z-index:1;
-    width:100%;
-    height:30px;
-    padding-top:14px;
-    margin-top:-5px;
-    box-sizing:border-box
+    left: 0px;
+    z-index: 1;
+    width: 100%;
+    height: 30px;
+    padding-top: 14px;
+    margin-top: -5px;
+    box-sizing: border-box;
 }
 rzslider .rz-bar-wrapper.rz-draggable{
     cursor:move
@@ -63,10 +63,10 @@ rzslider .rz-pointer{
     cursor:pointer;
     background-color: #fff;
 }
-
 rzslider.timerange .rz-bar-wrapper{
-    height:60px;
-    padding-top: 28px;
+    padding-top: 26px;
+    height: 50px;
+    margin: -11px 0px 0px;
 }
 
 rzslider.timerange .rz-bar{
@@ -75,10 +75,10 @@ rzslider.timerange .rz-bar{
 }
 
 rzslider.timerange .rz-pointer{
-    width:20px;
-    height:60px;
-    background:url("svg/arrow_timerange.svg") no-repeat;
-    background-size: contain;
+    width: 20px;
+    height: 65px;
+    background: transparent url("svg/arrow_timerange.svg") no-repeat scroll 0% 0% / contain;
+    margin: -9px 0px 0px;
 }
 
 rzslider.timerange .rz-pointer:nth-child(odd){

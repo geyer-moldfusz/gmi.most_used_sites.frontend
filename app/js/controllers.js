@@ -24,8 +24,10 @@ trckyrslfControllers.controller('NoUUIDController', [
   synopses.load();
 }]);
 
-trckyrslfControllers.controller('UUIDController', [
-    '$scope', 'Synopses', function($scope, synopses) {
+trckyrslfControllers.controller('CyberUUIDController', [
+    '$interval', '$scope', 'Synopses', function($interval, $scope, synopses) {
+
+  var uuid = '8TKcFC7fvBKdnn953eMf3CCT';
 
   $scope.ready = false;
   $scope.$watch(function() {
@@ -35,6 +37,16 @@ trckyrslfControllers.controller('UUIDController', [
       $scope.ready = true;
     }
   });
+
+  var i = $interval(function() {
+    if ($scope.ready) synopses.load(uuid, true);
+  }, 10000);
+
+  synopses.load(uuid);
+}]);
+
+trckyrslfControllers.controller('UUIDController', [
+    '$scope', 'Synopses', function($scope, synopses) {
 
   $scope.uuid = function(uuid) {
     synopses.load(uuid);
@@ -88,10 +100,6 @@ trckyrslfControllers.controller('SelectionController', ['$scope', 'Selection', f
     minValue: 0,
     maxValue: 24
   };
-
-  $scope.$on("message", function() {
-    console.log("message");
-  });
 
   $scope.$watch(function() {
     return selection.getTimings();

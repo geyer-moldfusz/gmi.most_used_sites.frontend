@@ -199,9 +199,9 @@ trckyrslfServices.factory('Selection', [function() {
   var getTimings = function() {
     return {
       share: share,
-      total: Math.floor(total / 10),
-      active: Math.floor(active / 10),
-      inactive: Math.floor(inactive / 10)
+      total: Math.floor(total / 1000),
+      active: Math.floor(active / 1000),
+      inactive: Math.floor(inactive / 1000)
     };
   };
 

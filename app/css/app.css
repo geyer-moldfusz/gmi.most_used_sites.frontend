@@ -47,6 +47,7 @@ nav {
 
 .navbar {
   margin-bottom: 7px;
+  min-height: unset;
 }
 
 nav div.active-menu {
@@ -204,6 +205,10 @@ nav #detail {
   letter-spacing: 0;
 }
 
+nav #small {
+  height: 30px;
+}
+
 nav input {
   background: #000;
   border: 1px solid;
@@ -306,7 +311,7 @@ text.font-xl {
   font-size: 2.5em;
   text-transform: uppercase;
 }
-#info a{
+#info a, #small a{
   position: absolute;
   bottom: 0;
   top: 0;
@@ -318,6 +323,9 @@ text.font-xl {
   color: white;
   width: 100%;
   transition: fill 0.4s;
+}
+#small a {
+  text-align: left;
 }
 #info a:hover {
   background-color: #333;

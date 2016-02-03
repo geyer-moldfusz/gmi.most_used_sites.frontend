@@ -18,6 +18,10 @@ trckyrslfApp.config(['$routeProvider',
         templateUrl: 'partials/synopes-list.html',
         controller: 'NoUUIDController'
       }).
+      when('/cyber', {
+        templateUrl: 'partials/synopes-list.html',
+        controller: 'CyberUUIDController'
+      }).
       otherwise({
         templateUrl: 'partials/synopes-list.html',
         controller: 'NoUUIDController'

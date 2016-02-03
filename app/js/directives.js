@@ -58,7 +58,13 @@ trckyrslfDirectives.directive('d3Treemap', function($window) {
       scope.$watch(function() {
         return scope.synopses.updated();
       }, function() {
-        render(scope.selection.getSynopses());
+        if (treemap.size()[0] == 1) {
+          console.log('render');
+          render(scope.selection.getSynopses());
+        } else {
+          console.log('transform');
+          transform(scope.selection.getSynopses());
+        }
       });
 
       scope.$watch(function() {
@@ -89,9 +95,10 @@ trckyrslfDirectives.directive('d3Treemap', function($window) {
             .attr("width", w)
             .attr("height", h)
           .append("svg:g")
+              .attr("class", "container")
               .attr("transform", "translate(.5,.5)");
 
-        var cell = svg.selectAll("g").data(nodes)
+        var cell = svg.selectAll("g.container").data(nodes)
           .enter().append("svg:g")
               .attr("class", "cell")
               .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
@@ -121,12 +128,31 @@ trckyrslfDirectives.directive('d3Treemap', function($window) {
       var transform = function(data) {
         if (!data.length) return;
 
-        treemap.size([w, h]).nodes({data: data})
+        var nodes = treemap.size([w, h]).nodes({data: data})
           .filter(function(d) { return (d.depth == 1); });
 
         var svg = d3.select(element[0]).select("svg")
           .attr("width", w)
           .attr("height", h);
+
+        var cell = d3.select(element[0]).selectAll("g.container").selectAll("g.cell")
+          .data(data, function(d) { if(d) return d.host; })
+          .enter()
+          .append("svg:g")
+              .attr("class", "cell")
+              .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
+              .on("click", function(d) { select(d.host); })
+
+        cell.append("svg:rect")
+            .attr("width", function(d) { return d.dx - border; })
+            .attr("height", function(d) { return d.dy - border; })
+
+        cell.append("svg:text")
+            .attr("x", function(d) { return d.dx / 2; })
+            .attr("y", function(d) { return d.dy / 2; })
+            .attr("dy", "0.5")
+            .attr("class", fontSize)
+            .text(function(d) { return d.host.replace(new RegExp(/^www\./), ""); });
 
         var t = svg.selectAll("g.cell")
           .on("click", function(d) {
